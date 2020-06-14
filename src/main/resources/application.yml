@@ -5,7 +5,17 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/springboot_demo?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     username: root
     password: root
-
+  # 邮箱配置
+  mail:
+    host: smtp.qq.com
+    username: yannay@qq.com
+    password: aoddanbnoowgggdj
+    properties.mail.smtp.port: 465 #端口号465或587
+    from: yannay@qq.com # 发送邮件的地址，和上面username一致
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    default-encoding: utf-8
 
 
   # 设置全局日期格式,如果设置这个格式,则代码中@DateTimeFormat(pattern = "dd/MM/yyyy") 无效!!
@@ -27,4 +37,7 @@ mybatis:
 logging:
   level:
     com.demo.springboot.helloworld.mapper: debug
+
+
+# 邮箱配置
 
