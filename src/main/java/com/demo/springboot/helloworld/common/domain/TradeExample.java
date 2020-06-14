@@ -1,5 +1,6 @@
 package com.demo.springboot.helloworld.common.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -305,52 +306,52 @@ public class TradeExample {
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountEqualTo(Long value) {
+        public Criteria andTradeAmountEqualTo(BigDecimal value) {
             addCriterion("trade_amount =", value, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountNotEqualTo(Long value) {
+        public Criteria andTradeAmountNotEqualTo(BigDecimal value) {
             addCriterion("trade_amount <>", value, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountGreaterThan(Long value) {
+        public Criteria andTradeAmountGreaterThan(BigDecimal value) {
             addCriterion("trade_amount >", value, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountGreaterThanOrEqualTo(Long value) {
+        public Criteria andTradeAmountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("trade_amount >=", value, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountLessThan(Long value) {
+        public Criteria andTradeAmountLessThan(BigDecimal value) {
             addCriterion("trade_amount <", value, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountLessThanOrEqualTo(Long value) {
+        public Criteria andTradeAmountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("trade_amount <=", value, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountIn(List<Long> values) {
+        public Criteria andTradeAmountIn(List<BigDecimal> values) {
             addCriterion("trade_amount in", values, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountNotIn(List<Long> values) {
+        public Criteria andTradeAmountNotIn(List<BigDecimal> values) {
             addCriterion("trade_amount not in", values, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountBetween(Long value1, Long value2) {
+        public Criteria andTradeAmountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("trade_amount between", value1, value2, "tradeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAmountNotBetween(Long value1, Long value2) {
+        public Criteria andTradeAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("trade_amount not between", value1, value2, "tradeAmount");
             return (Criteria) this;
         }
@@ -672,6 +673,66 @@ public class TradeExample {
 
         public Criteria andTradeStateNotBetween(Integer value1, Integer value2) {
             addCriterion("trade_state not between", value1, value2, "tradeState");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdIsNull() {
+            addCriterion("room_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdIsNotNull() {
+            addCriterion("room_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdEqualTo(Integer value) {
+            addCriterion("room_id =", value, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdNotEqualTo(Integer value) {
+            addCriterion("room_id <>", value, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdGreaterThan(Integer value) {
+            addCriterion("room_id >", value, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("room_id >=", value, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdLessThan(Integer value) {
+            addCriterion("room_id <", value, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdLessThanOrEqualTo(Integer value) {
+            addCriterion("room_id <=", value, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdIn(List<Integer> values) {
+            addCriterion("room_id in", values, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdNotIn(List<Integer> values) {
+            addCriterion("room_id not in", values, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdBetween(Integer value1, Integer value2) {
+            addCriterion("room_id between", value1, value2, "roomId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("room_id not between", value1, value2, "roomId");
             return (Criteria) this;
         }
     }

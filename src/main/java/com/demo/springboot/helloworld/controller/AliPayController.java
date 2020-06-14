@@ -8,7 +8,9 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
 
+import com.demo.springboot.helloworld.common.domain.Room;
 import com.demo.springboot.helloworld.common.domain.Trade;
+import com.demo.springboot.helloworld.service.RoomService;
 import com.demo.springboot.helloworld.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.demo.springboot.helloworld.config.AlipayConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +33,9 @@ import java.lang.String;
 public class AliPayController {
     @Autowired
     private TradeService tradeService;
+
+    @Autowired
+    private RoomService roomService;
 
     @RequestMapping("/goPay")
     public @ResponseBody
@@ -63,21 +69,38 @@ public class AliPayController {
         body="hello";
         System.out.println(body);
         //订单标题=系统订单号+酒店ID+房间Id+金额
-        String subject="hotel_id"+"room_id";// 暂时这么做
-        String total_amount="99.99";
         Timestamp ts= new Timestamp(new Date().getTime());
 
-        Trade trade = new Trade();
-        trade.setTradeAmount(Double.valueOf(total_amount));
-        trade.setTradeComment(body);
-        trade.setHotelId(1);
-        trade.setTradeCreateTime(ts);
-        trade.setTradeState(0);
-        trade.setTradeUserId(1);
-        trade.setTradeTitle(subject);
+        int roomId=1;
+        // 获取房间id
+        int hotelId=1;
+        String total_amount="99.99";//获取酒店id 这里用前台传入参数代替
+        String subject="hotel_id"+"room_id";// 暂时这么做
+
+
         // 注入数据库 此时订单状态为(0)
 
-        String out_trade_no=Integer.toString( tradeService.insertInitial(trade));
+        int out_trade_no_temp=0;//这个订单是已经默认付了款的 这样使支付宝返回已支付界面
+        if(roomService.isRoomEmpty(roomId))
+        {
+            Trade trade = new Trade();
+            trade.setTradeAmount(BigDecimal.valueOf(Double.valueOf(total_amount)));
+            trade.setTradeComment(body);
+            trade.setHotelId(hotelId);
+            trade.setRoomId(roomId);
+            trade.setTradeCreateTime(ts);
+            trade.setTradeState(0);
+            trade.setTradeUserId(1);// 获取当前登录用户ID
+            trade.setTradeTitle(subject);
+            //更改房间状态,只要进入了此步逻辑,无论是否付款成功都将订单改为已预订
+            Room room=new Room();
+            room.setRoomId(roomId);
+            room.setRoomState(1);
+            roomService.updateRoomSelective(room);
+            out_trade_no_temp =tradeService.insertInitial(trade);
+        }
+
+        String out_trade_no=Integer.toString(out_trade_no_temp );
         System.out.println("订单号"+out_trade_no);
 
         /*

@@ -1,5 +1,6 @@
 package com.demo.springboot.helloworld.common.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Trade {
@@ -9,7 +10,7 @@ public class Trade {
 
     private Integer hotelId;
 
-    private double tradeAmount;
+    private BigDecimal tradeAmount;
 
     private String tradeComment;
 
@@ -20,6 +21,8 @@ public class Trade {
     private String tradeTitle;
 
     private Integer tradeState;
+
+    private Integer roomId;
 
     public Integer getOutTradeNo() {
         return outTradeNo;
@@ -45,11 +48,11 @@ public class Trade {
         this.hotelId = hotelId;
     }
 
-    public double getTradeAmount() {
+    public BigDecimal getTradeAmount() {
         return tradeAmount;
     }
 
-    public void setTradeAmount(Double tradeAmount) {
+    public void setTradeAmount(BigDecimal tradeAmount) {
         this.tradeAmount = tradeAmount;
     }
 
@@ -91,5 +94,13 @@ public class Trade {
 
     public void setTradeState(Integer tradeState) {
         this.tradeState = tradeState;
+    }
+
+    public Integer getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 }

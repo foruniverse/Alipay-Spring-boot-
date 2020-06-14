@@ -14,10 +14,6 @@ public interface TradeMapper {
 
     int insert(Trade record);
 
-    //插入初始订单,这时的订单状态位"0",即等待用户支付(用户已点击支付按钮,但还未支付)
-    int insertInitial(Trade record);
-
-
     int insertSelective(Trade record);
 
     List<Trade> selectByExample(TradeExample example);
@@ -32,7 +28,5 @@ public interface TradeMapper {
 
     int updateByPrimaryKey(Trade record);
 
-
-
-
+    int insertInitial(Trade record);
 }

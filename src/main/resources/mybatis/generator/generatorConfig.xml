@@ -34,9 +34,10 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="hotel_trade" domainObjectName="Trade"></table>
+<!--        <table tableName="hotel_trade" domainObjectName="Trade"></table>-->
+        <table tableName="hotel_room" domainObjectName="Room"> </table>
 <!--        <table tableName="Admin" domainObjectName="Admin"/>-->
-        <!--<table tableName="Book" domainObjectName="Book"/>-->
+<!--        <table tableName="Book" domainObjectName="Book"/>-->
 
         <!--  <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
               <property name="useActualColumnNames" value="true"/>

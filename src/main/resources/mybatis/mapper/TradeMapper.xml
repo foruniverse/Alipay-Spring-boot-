@@ -5,12 +5,13 @@
     <id column="out_trade_no" jdbcType="INTEGER" property="outTradeNo" />
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
     <result column="hotel_id" jdbcType="INTEGER" property="hotelId" />
-    <result column="trade_amount" jdbcType="BIGINT" property="tradeAmount" />
+    <result column="trade_amount" jdbcType="DECIMAL" property="tradeAmount" />
     <result column="trade_comment" jdbcType="VARCHAR" property="tradeComment" />
     <result column="trade_user_id" jdbcType="INTEGER" property="tradeUserId" />
     <result column="trade_create_time" jdbcType="TIMESTAMP" property="tradeCreateTime" />
     <result column="trade_title" jdbcType="VARCHAR" property="tradeTitle" />
     <result column="trade_state" jdbcType="INTEGER" property="tradeState" />
+    <result column="room_id" jdbcType="INTEGER" property="roomId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     out_trade_no, trade_no, hotel_id, trade_amount, trade_comment, trade_user_id, trade_create_time, 
-    trade_title, trade_state
+    trade_title, trade_state, room_id
   </sql>
   <select id="selectByExample" parameterType="com.demo.springboot.helloworld.common.domain.TradeExample" resultMap="BaseResultMap">
     select
@@ -107,12 +108,12 @@
   <insert id="insert" parameterType="com.demo.springboot.helloworld.common.domain.Trade">
     insert into hotel_trade (out_trade_no, trade_no, hotel_id, 
       trade_amount, trade_comment, trade_user_id, 
-      trade_create_time, trade_title, trade_state
-      )
+      trade_create_time, trade_title, trade_state, 
+      room_id)
     values (#{outTradeNo,jdbcType=INTEGER}, #{tradeNo,jdbcType=VARCHAR}, #{hotelId,jdbcType=INTEGER}, 
-      #{tradeAmount,jdbcType=BIGINT}, #{tradeComment,jdbcType=VARCHAR}, #{tradeUserId,jdbcType=INTEGER}, 
-      #{tradeCreateTime,jdbcType=TIMESTAMP}, #{tradeTitle,jdbcType=VARCHAR}, #{tradeState,jdbcType=INTEGER}
-      )
+      #{tradeAmount,jdbcType=DECIMAL}, #{tradeComment,jdbcType=VARCHAR}, #{tradeUserId,jdbcType=INTEGER}, 
+      #{tradeCreateTime,jdbcType=TIMESTAMP}, #{tradeTitle,jdbcType=VARCHAR}, #{tradeState,jdbcType=INTEGER}, 
+      #{roomId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.demo.springboot.helloworld.common.domain.Trade">
     insert into hotel_trade
@@ -144,6 +145,9 @@
       <if test="tradeState != null">
         trade_state,
       </if>
+      <if test="roomId != null">
+        room_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="outTradeNo != null">
@@ -156,7 +160,7 @@
         #{hotelId,jdbcType=INTEGER},
       </if>
       <if test="tradeAmount != null">
-        #{tradeAmount,jdbcType=BIGINT},
+        #{tradeAmount,jdbcType=DECIMAL},
       </if>
       <if test="tradeComment != null">
         #{tradeComment,jdbcType=VARCHAR},
@@ -172,6 +176,9 @@
       </if>
       <if test="tradeState != null">
         #{tradeState,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null">
+        #{roomId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -194,7 +201,7 @@
         hotel_id = #{record.hotelId,jdbcType=INTEGER},
       </if>
       <if test="record.tradeAmount != null">
-        trade_amount = #{record.tradeAmount,jdbcType=BIGINT},
+        trade_amount = #{record.tradeAmount,jdbcType=DECIMAL},
       </if>
       <if test="record.tradeComment != null">
         trade_comment = #{record.tradeComment,jdbcType=VARCHAR},
@@ -211,6 +218,9 @@
       <if test="record.tradeState != null">
         trade_state = #{record.tradeState,jdbcType=INTEGER},
       </if>
+      <if test="record.roomId != null">
+        room_id = #{record.roomId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -221,12 +231,13 @@
     set out_trade_no = #{record.outTradeNo,jdbcType=INTEGER},
       trade_no = #{record.tradeNo,jdbcType=VARCHAR},
       hotel_id = #{record.hotelId,jdbcType=INTEGER},
-      trade_amount = #{record.tradeAmount,jdbcType=BIGINT},
+      trade_amount = #{record.tradeAmount,jdbcType=DECIMAL},
       trade_comment = #{record.tradeComment,jdbcType=VARCHAR},
       trade_user_id = #{record.tradeUserId,jdbcType=INTEGER},
       trade_create_time = #{record.tradeCreateTime,jdbcType=TIMESTAMP},
       trade_title = #{record.tradeTitle,jdbcType=VARCHAR},
-      trade_state = #{record.tradeState,jdbcType=INTEGER}
+      trade_state = #{record.tradeState,jdbcType=INTEGER},
+      room_id = #{record.roomId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,7 +252,7 @@
         hotel_id = #{hotelId,jdbcType=INTEGER},
       </if>
       <if test="tradeAmount != null">
-        trade_amount = #{tradeAmount,jdbcType=BIGINT},
+        trade_amount = #{tradeAmount,jdbcType=DECIMAL},
       </if>
       <if test="tradeComment != null">
         trade_comment = #{tradeComment,jdbcType=VARCHAR},
@@ -258,6 +269,9 @@
       <if test="tradeState != null">
         trade_state = #{tradeState,jdbcType=INTEGER},
       </if>
+      <if test="roomId != null">
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
     </set>
     where out_trade_no = #{outTradeNo,jdbcType=INTEGER}
   </update>
@@ -265,26 +279,26 @@
     update hotel_trade
     set trade_no = #{tradeNo,jdbcType=VARCHAR},
       hotel_id = #{hotelId,jdbcType=INTEGER},
-      trade_amount = #{tradeAmount,jdbcType=BIGINT},
+      trade_amount = #{tradeAmount,jdbcType=DECIMAL},
       trade_comment = #{tradeComment,jdbcType=VARCHAR},
       trade_user_id = #{tradeUserId,jdbcType=INTEGER},
       trade_create_time = #{tradeCreateTime,jdbcType=TIMESTAMP},
       trade_title = #{tradeTitle,jdbcType=VARCHAR},
-      trade_state = #{tradeState,jdbcType=INTEGER}
+      trade_state = #{tradeState,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER}
     where out_trade_no = #{outTradeNo,jdbcType=INTEGER}
   </update>
-<!--  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-  <insert id="insertInitial" parameterType="com.demo.springboot.helloworld.common.domain.Trade">
-    insert into hotel_trade (hotel_id,
+
+  <insert id="insertInitial"  parameterType="com.demo.springboot.helloworld.common.domain.Trade" useGeneratedKeys="true" keyProperty="outTradeNo">
+
+
+    insert into hotel_trade (trade_no, hotel_id,
       trade_amount, trade_comment, trade_user_id,
-      trade_create_time, trade_title, trade_state
-      )
-    values (#{hotelId,jdbcType=INTEGER},
-      #{tradeAmount,jdbcType=BIGINT}, #{tradeComment,jdbcType=VARCHAR}, #{tradeUserId,jdbcType=INTEGER},
-      #{tradeCreateTime,jdbcType=TIMESTAMP}, #{tradeTitle,jdbcType=VARCHAR}, #{tradeState,jdbcType=INTEGER}
-      )
-      <selectKey keyProperty="outTradeNo" order="AFTER" resultType="java.lang.Integer">
-        select LAST_INSERT_ID();
-      </selectKey>
+      trade_create_time, trade_title, trade_state,
+      room_id)
+    values (#{tradeNo,jdbcType=VARCHAR}, #{hotelId,jdbcType=INTEGER},
+      #{tradeAmount,jdbcType=DECIMAL}, #{tradeComment,jdbcType=VARCHAR}, #{tradeUserId,jdbcType=INTEGER},
+      #{tradeCreateTime,jdbcType=TIMESTAMP}, #{tradeTitle,jdbcType=VARCHAR}, #{tradeState,jdbcType=INTEGER},
+      #{roomId,jdbcType=INTEGER})
   </insert>
 </mapper>
