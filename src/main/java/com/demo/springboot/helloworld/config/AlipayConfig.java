@@ -32,10 +32,10 @@ import java.io.IOException;
         public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuudoKSMYm/5RpsvtLBuY93GTA9BTEWgHQfZpS6l35lr6ASJ/yaWG+MS9c4w1Huoh+FxuExmJs4rVUOdYh1xeW6X5Jp3Gb6sPBe7s5LGVIB8D6ku0ysvmR8yvq9H+qmCNKTFIJZKWDKpX+UFwsK/Hke3MjHBs/AS0/6gZHYNMiryHwCK8FK9/ztdMbOQGzQSgvtI2ql4k4lLUq/qIrHbf/pfbaRDB/OZ5Fb73g9q6Xvmj6R/mS5mz0i5bR6wdCfxiVQTzEWn1GrUNaKhSXzT2uzx0HdAEBZVfGnxsqClsgw7OkbOCWAdq6CgEteej+EfoTEpedwDyz1fs/j31jZQ+LwIDAQAB";
 
         // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-        public static String notify_url = "http://localhost:8585/aliPay/notify";
+        public static String notify_url = "http://321l939v35.zicp.vip:80/aliPay/notify";
 
         // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-        public static String return_url = "http://localhost:8585/aliPay/return";
+        public static String return_url = "http://321l939v35.zicp.vip:80/aliPay/return";
 
         // 签名方式
         public static String sign_type = "RSA2";

@@ -10,8 +10,8 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--覆盖生成XML文件-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/springboot_demo?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/springboot_demo?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;serverTimezone=UTC"
                         userId="root"
                         password="root">
         </jdbcConnection>
@@ -34,8 +34,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
-        <table tableName="Admin" domainObjectName="Admin"/>
+        <table tableName="hotel_trade" domainObjectName="Trade"></table>
+<!--        <table tableName="Admin" domainObjectName="Admin"/>-->
         <!--<table tableName="Book" domainObjectName="Book"/>-->
 
         <!--  <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
