@@ -289,7 +289,7 @@
     where out_trade_no = #{outTradeNo,jdbcType=INTEGER}
   </update>
 
-  <insert id="insertInitial"  parameterType="com.demo.springboot.helloworld.common.domain.Trade" useGeneratedKeys="true" keyProperty="outTradeNo">
+  <insert id="insertInitial"  parameterType="com.demo.springboot.helloworld.common.domain.Trade" useGeneratedKeys="true" keyProperty="outTradeNo" keyColumn="out_trade_no">
 
 
     insert into hotel_trade (trade_no, hotel_id,

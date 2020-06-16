@@ -28,5 +28,7 @@ public class TradeServiceImpl implements TradeService {
     public int insertInitial(Trade trade)
     {
         return tradeMapper.insertInitial(trade);
+        //返回的是插入的行数
+        //不是自增id
     }
 }

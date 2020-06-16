@@ -1,4 +1,5 @@
 <!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,8 +8,51 @@
     <title>Document</title>
 </head>
 <body>
-临时测试页面
-支付成功
+<p th:text="'系统内部订单号:' + ${out_trade_no}"/>
+<p th:text="'订单金额:' + ${total_amount}"/>
+<p th:text="'内部订单号:' + ${trade_no}"/>
+
+
+<form name=alipayment action="/aliPay/refund" method=post target="_blank">
+    <div id="body1" >
+        <dl class="content">
+
+            <dt>退款金额 不能超过原始金额：</dt>
+            <dd>
+                <input id="hotel_id" name="WIDTRrefund_amount" />
+            </dd>
+            <hr class="one_line">
+
+            <dt>退款商户订单号 ：</dt>
+            <dd>
+                <input id="total_amount" name="WIDTRout_trade_no" />
+            </dd>
+            <hr class="one_line">
+            <dt>支付宝内部订单号 ：</dt>
+            <dd>
+                <input id="room_id" name="WIDTRtrade_no" />
+            </dd>
+            <hr class="one_line">
+            <dt>退款原因：</dt>
+            <dd>
+                <input id="trade_comment" name="WIDTRrefund_reason" />
+            </dd>
+            <hr class="one_line">
+            <dt>退款标号,保证同一次退款编号唯一,没有加验证,填准一点：</dt>
+            <dd>
+                <input id="tr" name="WIDTRout_request_no" />
+            </dd>
+            <hr class="one_line">
+            <dt></dt>
+            <dd id="btn-dd">
+						<span class="new-btn-login-sp">
+							<button class="new-btn-login" type="submit"
+                                    style="text-align: center;">退款</button>
+						</span> <span class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
+            </dd>
+        </dl>
+    </div>
+</form>
 </body>
 </html>
 

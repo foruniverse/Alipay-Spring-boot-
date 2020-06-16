@@ -6,6 +6,7 @@ import com.demo.springboot.helloworld.common.domain.Room;
 import com.demo.springboot.helloworld.common.domain.Trade;
 import com.demo.springboot.helloworld.mapper.AdminMapper;
 import com.demo.springboot.helloworld.mapper.BookMapper;
+import com.demo.springboot.helloworld.mapper.RoomMapper;
 import com.demo.springboot.helloworld.mapper.TradeMapper;
 import com.demo.springboot.helloworld.service.MailService;
 import com.demo.springboot.helloworld.service.RoomService;
@@ -23,6 +24,8 @@ class HelloworldApplicationTests {
     @Autowired
     BookMapper bookMapper;
 
+    @Autowired
+    RoomMapper roomMapper;
     @Autowired
     TradeMapper tradeMapper;
 
@@ -76,6 +79,19 @@ class HelloworldApplicationTests {
         trade.setTradeState(1);
         tradeService.updateTradeState(trade);
     }
+    @Test
+    public void insertRoom()
+    {
+
+        for(int i=1;i<=10;i++)
+        {
+            Room room = new Room();
+            room.setHotelId(1);
+            room.setRoomPrice((int) Math.random() % 200 );
+            room.setRoomState(0);
+            roomMapper.insertSelective(room);
+        }
+    }
 
     @Test
     public void insertInitial()
@@ -83,7 +99,7 @@ class HelloworldApplicationTests {
         int hotelId=10;
         String total_amount="99.99";
         String body="hello worl";
-        int roomId =1;
+        int roomId =9;
         Timestamp ts= new Timestamp(new Date().getTime());
         String subject="hotel_id"+"room_id";
         Trade trade = new Trade();
@@ -101,7 +117,7 @@ class HelloworldApplicationTests {
         room.setRoomState (1);
         roomService.updateRoomSelective(room);
         int out_trade_no_temp =tradeService.insertInitial(trade);
-        System.out.println(out_trade_no_temp);
+        System.out.println(trade.getOutTradeNo());
     }
 
 }
