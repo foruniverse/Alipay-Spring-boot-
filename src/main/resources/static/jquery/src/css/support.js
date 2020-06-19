@@ -33,7 +33,7 @@ define( [
 		reliableMarginLeftVal = roundPixelMeasures( divStyle.marginLeft ) === 12;
 
 		// Support: Android 4.0 - 4.3 only, Safari <=9.1 - 10.1, iOS <=7.0 - 9.3
-		// Some styles come back with percentage values, even though they shouldn't
+		// Some styles com back with percentage values, even though they shouldn't
 		div.style.right = "60%";
 		pixelBoxStylesVal = roundPixelMeasures( divStyle.right ) === 36;
 
