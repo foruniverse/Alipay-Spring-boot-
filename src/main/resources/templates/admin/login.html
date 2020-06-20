@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        登录
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="./css/x-admin.css" media="all">
+    <style>
+        .x-login-box input{font-size: 18px!important;}
+    </style>
+</head>
+
+<body style="background-color: #393D49">
+    <div class="x-box">
+        <div class="x-top">
+            <!-- <i class="layui-icon x-login-close">
+                &#x1007;
+            </i> -->
+            <ul class="x-login-right">
+                <li style="background-color: #F1C85F;" color="#F1C85F">
+                </li>
+                <li style="background-color: #EA569A;" color="#EA569A">
+                </li>
+                <li style="background-color: #393D49;" color="#393D49">
+                </li>
+            </ul>
+        </div>
+        <div class="x-mid">
+            <div class="x-avtar">
+                <img src="./images/logo.png" alt="">
+            </div>
+            <div class="input">
+                <form class="layui-form">
+                    <div class="layui-form-item x-login-box">
+                        <label for="username" class="layui-form-label">
+                            <i class="layui-icon">&#xe612;</i>
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="username" name="username" required="" lay-verify="username"
+                                autocomplete="off" placeholder="请输入邮箱" placeholder="" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item x-login-box">
+                        <label for="pass" class="layui-form-label">
+                            <i class="layui-icon">&#xe628;</i>
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="password" id="pass" name="pass" required="" lay-verify="pass"
+                                autocomplete="off" placeholder="请输入密码" placeholder="" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" id="loginbtn">
+                        <button class="layui-btn" lay-filter="login" lay-submit="">
+                            <span class="a">登 录</span>
+                            <span class="b" style="display: none;">login</span>
+                        </button>
+                    </div>
+                    <a style="display: table;
+                    margin: 0 auto;
+                    color: #9e9e9e;margin-left: 30%;"  href="./sign.html">
+                      <span class="a">注册</span>
+                      <span class="b" style="display: none;">register</span>
+                    </a>
+                    <a style="display: table;
+                    margin: 0 auto;
+                    color: #9e9e9e;margin-left: 60%;margin-top: -20px;"  href="./zh.html">
+                      <span class="a">找回密码</span>
+                      <span class="b" style="display: none;">register</span>
+                    </a>
+                </form>
+                <!-- <span style="position: absolute;top:20px;right: 20px;cursor: pointer;" class="btns">中文</span> -->
+            </div>
+        </div>
+    </div>
+    <p style="color:#fff;text-align: center;">Copyright © 2017.Company name All rights X-admin </p>
+    <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script src="./js/common.js"></script>
+    <script>
+        layui.use(['form'],
+            function () {
+                $ = layui.jquery;
+                var form = layui.form(),
+                    layer = layui.layer;
+
+                $('.x-login-right li').click(function (event) {
+                    color = $(this).attr('color');
+                    $('body').css('background-color', color);
+                });
+                var flag = 1
+                $('.btns').click(function (event) {
+                    if(flag==1){
+                      $('.a').hide();
+                      $('.b').show();
+                      $(".btns").html("中文")
+                    flag = 2
+                    }else{
+                      $('.a').show();
+                      $('.b').hide();
+                      $(".btns").html("英文")
+                      flag = 1
+                    }
+                });
+                form.on('submit(login)',
+                    function (data) {
+                        var username = data.field.username
+                        var password = data.field.pass
+                        if (username == "") {
+                            return
+                        }
+                        if (password == "") {
+                            return
+                        }
+                        var data = {
+                            email: username,
+                            password: password
+                        }
+                        _post(login, data, function (result) {
+                          console.log("resultresult",result)
+                            if (result.code == 1) {
+                                // phone					手机
+                                // pic					头像
+                                // name					姓名
+                                // sex					性别
+                                // age					年龄
+                                // zfb					支付宝
+                                // level					//1普通  2管理员  3超级管理员
+                                // id
+                                var userInfo = JSON.stringify(result.data)
+                                localStorage.setItem("userInfo", userInfo)
+                                localStorage.setItem("token", result.data.email)
+                                localStorage.setItem("id", result.data.id)
+                                localStorage.setItem("phone", result.data.phone)
+                                localStorage.setItem("pic", result.data.pic)
+                                localStorage.setItem("name", result.data.name)
+                                localStorage.setItem("sex", result.data.sex)
+                                localStorage.setItem("age", result.data.age)
+                                localStorage.setItem("zfb", result.data.zfb)
+                                localStorage.setItem("level", result.data.level)
+                                localStorage.setItem("ulevel", result.data.level)
+                                localStorage.setItem("username", result.data.email)
+                                toast('登陆成功')
+                                setTimeout(() => {
+                                    window.location.href = "./index.html"
+                                }, 300);
+                            } else {
+                                toast(result.message)
+                            }
+                        });
+                        return false;
+                    });
+
+            });
+    </script>
+</body>
+
+</html>

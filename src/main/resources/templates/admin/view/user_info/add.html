@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        酒店辅助订购系统
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../css/x-admin.css" media="all">
+</head>
+
+<body>
+    <div class="x-body">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="username" class="layui-form-label">
+                    <span class="x-red">*</span>图书号
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="bookno" name="bookno" required="" lay-verify="required" autocomplete="off"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="bookname" class="layui-form-label">
+                    图书名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="bookname" name="bookname" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="press" class="layui-form-label">
+                    出版社
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="press" name="press" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="categoryno" class="layui-form-label">
+                    类别号
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="categoryno" name="categoryno" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="author" class="layui-form-label">
+                    作者
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="author" name="author" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+              <label for="num" class="layui-form-label">
+                <span class="x-red">*</span> 数量
+              </label>
+              <div class="layui-input-inline">
+                  <input type="number" id="num" name="num" required="" lay-verify="required" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                </label>
+                <button class="layui-btn" lay-filter="add" lay-submit="">
+                    提交
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="../../lib/layui/layui.js" charset="utf-8"></script>
+    <script src="../../js/x-layui.js" charset="utf-8"></script>
+    <script src="../../js/common.js"></script>
+    <script>
+        layui.use(['form', 'layer'], function () {
+            $ = layui.jquery;
+            var form = layui.form(),
+                layer = layui.layer;
+            form.on('submit(add)', function (data) {
+                var bookno = data.field.bookno
+                var bookname = data.field.bookname
+                var categoryno = data.field.categoryno
+                var press = data.field.press
+                var author = data.field.author
+                var num = data.field.num
+                var data = {
+                    bookno: bookno,
+                    categoryno: categoryno,
+                    bookname: bookname,
+                    press: press,
+                    author: author,
+                    num:num
+                }
+                _post(addBook, data, function (result) {
+                    if (result.code == 1) {
+                        layer.alert("添加成功", {
+                            icon: 6
+                        }, function () {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                            parent.location.reload()
+                        });
+                    } else {
+                        toast(result.message)
+                    }
+                });
+                return false;
+            });
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    酒店辅助订购系统
+  </title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="./css/x-admin.css" media="all">
+</head>
+
+<body>
+  <div class="layui-layout layui-layout-admin">
+    <div class="layui-header header header-demo">
+      <div class="layui-main">
+        <a class="logo" href="./index.html">
+          酒店辅助订票系统
+        </a>
+        <ul class="layui-nav" lay-filter="">
+          <li class="layui-nav-item"><img src="./images/logo.png" class="layui-circle"
+              style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>
+          <li class="layui-nav-item">
+            <a id="role" style="min-width: 90px;" href="javascript:;"></a>
+            <dl class="layui-nav-child">
+              <dd id="gr"><a href="javascript:;">个人资料</a></dd>
+              <dd id="xg"><a href="javascript:;">修改密码</a></dd>
+              <dd><a href="./login.html">切换帐号</a></dd>
+              <dd><a href="javascript:;" onclick="exitLogin()">退出</a></dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="layui-side layui-bg-black x-side">
+      <div class="layui-side-scroll">
+        <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="side">
+          <li class="layui-nav-item">
+            <a class="javascript:;" href="javascript:;">
+              <i class="layui-icon" style="top: 3px;">&#xe630;</i><cite>首页</cite>
+            </a>
+            <dl class="layui-nav-child">
+              <dd id="idname">
+                <a href="javascript:;" _href="./view/types/list.html">
+                  <cite>订单管理</cite>
+                </a>
+              </dd>
+              <dd class="">
+                <a href="javascript:;" _href="./view/user_manage/list.html">
+                  <cite>用户管理</cite>
+                </a>
+              </dd>
+              <!-- <dd class="">
+                <a href="javascript:;" _href="./view/books/list.html">
+                  <cite>个人资料</cite>
+                </a>
+              </dd> -->
+              <!-- <dd class="">
+                <a href="javascript:;" _href="./view/warehouse/list.html">
+                  <cite>仓库信息管理</cite>
+                </a>
+              </dd>
+              <dd class="">
+                <a href="javascript:;" _href="./view/putIn/list.html">
+                  <cite>入库管理</cite>
+                </a>
+              </dd>
+              <dd class="">
+                <a href="javascript:;" _href="./view/putOut/list.html">
+                  <cite>出库管理</cite>
+                </a>
+              </dd> -->
+            </dl>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="layui-tab layui-tab-card site-demo-title x-main" lay-filter="x-tab" lay-allowclose="true">
+      <div class="x-slide_left"></div>
+      <ul class="layui-tab-title">
+        <li class="layui-this">
+          首页
+          <i class="layui-icon layui-unselect layui-tab-close">ဆ</i>
+        </li>
+      </ul>
+      <div class="layui-tab-content site-demo site-demo-body">
+        <div class="layui-tab-item layui-show">
+          <iframe frameborder="0" src="./view/home.html" class="x-iframe"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="site-mobile-shade">
+    </div>
+  </div>
+  <script src="./lib/layui/layui.js" charset="utf-8"></script>
+  <script src="./js/x-admin.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/style.js"></script>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script>
+    if(localStorage.getItem("ulevel")==0){
+      document.getElementById("idname").style.display="none";
+    }
+    document.getElementById("role").innerHTML=localStorage.getItem("name");
+    $("#xg").click(function(){
+      layer.open({
+      type: 2,
+      title: '修改密码',
+      shadeClose: true,
+      shade: false,
+      maxmin: true, //开启最大化最小化按钮
+      area: ['493px', '600px'],
+      content: 'view/user_info/xg.html'
+    });
+    })
+    $("#gr").click(function(){
+      layer.open({
+      type: 2,
+      title: '个人资料',
+      shadeClose: true,
+      shade: false,
+      maxmin: true, //开启最大化最小化按钮
+      area: ['493px', '600px'],
+      content: 'view/user_info/list.html'
+    });
+    })
+  </script>
+</body>
+
+</html>

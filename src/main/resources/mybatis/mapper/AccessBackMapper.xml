@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.springboot.helloworld.mapper.AccessBackMapper">
+
+
+    <select id="findCode" resultType="com.demo.springboot.helloworld.entity.ZCode" parameterType="Map">
+        select  *
+        from code  where status='1' and mail=#{mail}
+        order by createtime desc  limit 1
+    </select>
+
+
+    <update id="updateCode"  parameterType="com.demo.springboot.helloworld.entity.ZCode">
+        UPDATE code set status='2'
+        WHERE id=#{id}
+    </update>
+
+    <insert id="regist" parameterType="com.demo.springboot.helloworld.entity.ZUser">
+        insert into user (id,email,phone,pic,password,name,sex,age,zfb,createtime,level)
+            values
+        (#{id},#{email},#{phone},#{pic},#{password},#{name},#{sex},#{age},#{zfb},#{createtime},#{level});
+    </insert>
+
+    <insert id="getCode" parameterType="com.demo.springboot.helloworld.entity.ZCode">
+        insert into code (id,code,mail,status,createtime) values (#{id},#{code},#{mail},#{status},#{createtime});
+    </insert>
+
+    <select id="login" resultType="com.demo.springboot.helloworld.entity.ZUser" parameterType="com.demo.springboot.helloworld.entity.ZUser">
+        select  * from user  where  email=#{email} and password=#{password}
+    </select>
+
+    <select id="findZUserById" resultType="com.demo.springboot.helloworld.entity.ZUser" parameterType="java.lang.String">
+        select  * from user  where id=#{id}
+    </select>
+
+    <update id="updateZUser"  parameterType="com.demo.springboot.helloworld.entity.ZUser">
+        UPDATE user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="password!=null and password!= ''">password=#{password},</if>
+            <if test="phone!=null and phone!= ''">phone=#{phone},</if>
+            <if test="pic!=null and pic!= ''">pic=#{pic},</if>
+            <if test="name!=null and name!= ''">name=#{name},</if>
+            <if test="sex!=null and sex!= ''">sex=#{sex},</if>
+            <if test="age!=null and age!= ''">age=#{age},</if>
+            <if test="zfb!=null and zfb!= ''">zfb=#{zfb},</if>
+            <if test="level!=null and level!= ''">level=#{level},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <select id="findZUserByEmail" resultType="com.demo.springboot.helloworld.entity.ZUser" parameterType="Map">
+        select  * from user  where email=#{mail}  limit 1
+    </select>
+
+
+
+    <select id="findOrder" resultType="com.demo.springboot.helloworld.entity.ZOrder" parameterType="com.demo.springboot.helloworld.entity.ZOrder">
+        select * from z_order a
+        <if test="level==1">
+            where a.email = #{email}
+        </if>
+        <if test="level==2">
+            ,user b where a.uid=b.id  AND (b.level = 1 or a.email = #{email})
+        </if>
+        <if test="level==3">
+            ,user b where a.uid=b.id  AND (b.level = 1 or b.level = 2 or b.level = 3)
+        </if>
+        <if test="mobile != null and mobile!= ''">
+            AND a.mobile like concat('%',#{mobile},'%')
+        </if>
+        <if test="orderno != null and orderno!= ''">
+            AND a.orderno like concat('%',#{orderno},'%')
+        </if>
+        order by a.createtime desc  limit #{page},#{pageSize}
+    </select>
+
+    <select id="findOrderCount" resultType="java.lang.Integer" parameterType="com.demo.springboot.helloworld.entity.ZOrder">
+        select count(1) from z_order a
+        <if test="level==1">
+            where a.email = #{email}
+        </if>
+        <if test="level==2">
+            ,user b where a.uid=b.id  AND (b.level = 1 or a.email = #{email})
+        </if>
+        <if test="level==3">
+            ,user b where a.uid=b.id  AND (b.level = 1 or b.level = 2 or b.level = 3)
+        </if>
+        <if test="mobile != null and mobile!= ''">
+            AND a.mobile like concat('%',#{mobile},'%')
+        </if>
+        <if test="orderno != null and orderno!= ''">
+            AND a.orderno like concat('%',#{orderno},'%')
+        </if>
+    </select>
+
+    <select id="findOrderDetail" resultType="com.demo.springboot.helloworld.entity.ZOrderDetail" parameterType="com.demo.springboot.helloworld.entity.ZOrderDetail">
+        select * from z_order_detail where 1=1
+        <if test="orderno != null and orderno!= ''">
+            AND orderno = #{orderno}
+        </if>
+        order by createtime desc  limit #{page},#{pageSize}
+    </select>
+
+    <select id="findOrderDetailCount" resultType="java.lang.Integer" parameterType="com.demo.springboot.helloworld.entity.ZOrderDetail">
+        select count(1) from z_order_detail where 1=1
+        <if test="orderno != null and orderno!= ''">
+            AND orderno = #{orderno}
+        </if>
+    </select>
+
+
+    <select id="findZUser" resultType="com.demo.springboot.helloworld.entity.ZUser" parameterType="com.demo.springboot.helloworld.entity.ZUser">
+        select * from user where level &lt; #{level}
+        <if test="name != null and name!= ''">
+            AND name = #{name}
+        </if>
+        order by createtime desc  limit #{page},#{pageSize}
+    </select>
+
+    <select id="findZUserCount" resultType="java.lang.Integer" parameterType="com.demo.springboot.helloworld.entity.ZUser">
+        select count(1) from user where level &lt; #{level}
+        <if test="name != null and name!= ''">
+            AND name = #{name}
+        </if>
+    </select>
+
+    <delete id="deleteZUser" parameterType="String">
+        delete from user where id = #{id}
+    </delete>
+</mapper>

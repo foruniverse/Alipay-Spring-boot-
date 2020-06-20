@@ -1086,7 +1086,7 @@
 
 	        self.options.totalRows = res[self.options.totalField]; // if this is a search, potentially less results will be returned
 	        // so cache windows need to be rebuilt. Otherwise it
-	        // will come out the same
+	        // will com out the same
 
 	        self.setCacheWindows();
 	        self.setCurrWindow(params.drawOffset); // just load data for the page

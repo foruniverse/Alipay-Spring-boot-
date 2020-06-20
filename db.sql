@@ -1,3 +1,4 @@
+
 drop database if exists springboot_demo; -- 数据库名不能用中划线-
 create database springboot_demo;
 use springboot_demo;
@@ -10,7 +11,6 @@ CREATE TABLE hotel_room
 	room_price INT NOT NULL,
 	PRIMARY KEY(room_id)
 );
-
 drop table if exists hotel_trade;
 
 /*==============================================================*/
