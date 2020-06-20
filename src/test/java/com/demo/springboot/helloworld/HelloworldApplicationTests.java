@@ -30,7 +30,6 @@ class HelloworldApplicationTests {
     RoomService roomService;
 
 
-
     @Autowired
     private MailService mailService;
 
