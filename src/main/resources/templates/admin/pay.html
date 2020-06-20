@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>支付页面</title>
+</head>
+<body>
+`<form name=alipayment action="/aliPay/goPay" method=post target="_blank">
+    <div id="body1" >
+        <dl class="content">
+
+            <dt>酒店id ：</dt>
+            <dd>
+                <input id="hotel_id" name="hotel_id" />
+            </dd>
+            <hr class="one_line">
+            <dt>支付金额 ：</dt>
+            <dd>
+                <input id="total_amount" name="total_amount" />
+            </dd>
+            <hr class="one_line">
+            <dt>房间id ：</dt>
+            <dd>
+                <input id="room_id" name="room_id" />
+            </dd>
+            <hr class="one_line">
+            <dt>商品描述：</dt>
+            <dd>
+                <input id="trade_comment" name="trade_comment" />
+            </dd>
+            <hr class="one_line">
+            <dt></dt>
+            <dd id="btn-dd">
+						<span class="new-btn-login-sp">
+							<button class="new-btn-login" type="submit"
+                                    style="text-align: center;">付 款</button>
+						</span> <span class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
+            </dd>
+        </dl>
+    </div>
+</form>
+</body>
+</html>

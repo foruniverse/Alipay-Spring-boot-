@@ -148,9 +148,9 @@
                                 localStorage.setItem("ulevel", result.data.level)
                                 localStorage.setItem("username", result.data.email)
                                 toast('登陆成功')
-                                setTimeout(() => {
-                                    window.location.href = "./index.html"
-                                }, 300);
+
+                                setTimeout(function(){window.location.href = "./index.html"}, 300);
+
                             } else {
                                 toast(result.message)
                             }

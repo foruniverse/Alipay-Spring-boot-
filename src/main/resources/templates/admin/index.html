@@ -31,6 +31,7 @@
             <dl class="layui-nav-child">
               <dd id="gr"><a href="javascript:;">个人资料</a></dd>
               <dd id="xg"><a href="javascript:;">修改密码</a></dd>
+              <dd id="dingdan"><a href="javascript:;">订单查看</a></dd>
               <dd><a href="./login.html">切换帐号</a></dd>
               <dd><a href="javascript:;" onclick="exitLogin()">退出</a></dd>
             </dl>
@@ -129,6 +130,17 @@
       area: ['493px', '600px'],
       content: 'view/user_info/list.html'
     });
+    })
+    $("#dingdan").click(function(){
+      layer.open({
+        type: 2,
+        title: '订单查看',
+        shadeClose: true,
+        shade: false,
+        maxmin: true, //开启最大化最小化按钮
+        area: ['1200px', '600px'],
+        content: 'view/types/list.html'
+      });
     })
   </script>
 </body>
