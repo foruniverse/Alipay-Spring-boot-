@@ -1,24 +1,33 @@
 drop database if exists springboot_demo; -- 数据库名不能用中划线-
 create database springboot_demo;
 use springboot_demo;
-create table `Admin`(
-  id int auto_increment,
-  loginName varchar(255),
-  password varchar(64),
-  lastLoginTime datetime,
-  remark  varchar(255),
-  primary key (id)
-);
-insert into Admin(loginName,password,remark) values ('admin','admin','测试数据:管理员用户');
 
-create table `Book`(
-  id int auto_increment,
-  name varchar(255),
-  price double,
-  author varchar(255),
-  creatorId int ,
-  remark  varchar(255),
-  primary key (id)
+CREATE TABLE hotel_room
+(
+	room_id INT NOT NULL AUTO_INCREMENT,
+	hotel_id INT  NOT NULL,
+	room_state INT NOT NULL,
+	room_price INT NOT NULL,
+	PRIMARY KEY(room_id)
 );
 
+drop table if exists hotel_trade;
 
+/*==============================================================*/
+/* Table: hotel_trade                                           */
+/*==============================================================*/
+create table hotel_trade
+(
+   out_trade_no         int not null auto_increment,
+   trade_no             varchar(64),
+   hotel_id             int not null,
+   trade_amount         decimal(10,2)  not null,
+   trade_comment        varchar(500),
+   trade_user_id        int not null,
+   trade_create_time    timestamp,
+   trade_title          varchar(255) not null,
+   trade_state          int not null,
+   primary key (out_trade_no)
+);
+
+alter table hotel_trade comment '酒店订单数据';
