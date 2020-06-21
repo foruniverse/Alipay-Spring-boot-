@@ -27,7 +27,7 @@ layui.use(['laydate', 'element', 'laypage', 'layer', 'form'], function () {
             page: page,
             level:localStorage.getItem("level")
         }
-        _post(findZUser, data, function (result) {
+        _post(findUser, data, function (result) {
             if (result.code == 1) {
                 list = result.data.dataList
                 setListData(result.data.dataList)

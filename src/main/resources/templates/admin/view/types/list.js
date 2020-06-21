@@ -87,10 +87,7 @@ layui.use(['laydate', 'element', 'laypage', 'layer', 'form'], function () {
                             ${item.orderno}
                         </td>
                         <td>
-                            ${item.status}
-                        </td>
-                        <td>
-                            ${item.email}
+                            ${item.uid}
                         </td>
                         <td>
                             ${item.hotel}
@@ -99,10 +96,22 @@ layui.use(['laydate', 'element', 'laypage', 'layer', 'form'], function () {
                             ${item.totleprice}
                         </td>
                         <td>
+                            ${item.checkin}
+                        </td>
+                        <td>
+                            ${item.checkout}
+                        </td>
+                        <td>
+                            ${item.createtime}
+                        </td>
+                        <td>
                             ${item.mobile}
                         </td>
                         <td>
-                            ${item.ordertime}
+                            ${item.email}
+                        </td>
+                        <td>
+                            ${item.status}
                         </td>
                         <td class="td-manage">
                             <a class="layui-btn layui-btn-xs edit" data-w='1080' data-h='500' data-index='${index}' data-url='edit.html' data-title='详情'"

@@ -1,10 +1,10 @@
-package com.demo.springboot.helloworld.service.impl;
+package com.demo.springboot.helloworld.service;
 
 
-import com.demo.springboot.helloworld.entity.*;
+import com.demo.springboot.helloworld.common.domain.*;
 import com.demo.springboot.helloworld.mapper.AccessBackMapper;
 import com.demo.springboot.helloworld.service.AccessBackService;
-import com.demo.springboot.helloworld.util.*;
+import com.demo.springboot.helloworld.common.utils.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,17 +20,17 @@ public class AccessBackServiceImpl implements AccessBackService {
 
 
     @Override
-    public void regist(ZUser zUser){
+    public void regist(User zUser){
         try{
             Map<String ,Object> map = new HashMap<String ,Object>();
             map.put("mail",zUser.getEmail());
 
-            ZUser u=accessBackMapper.findZUserByEmail(map);
+            User u=accessBackMapper.findUserByEmail(map);
             if(u!=null){
                 throw new RuntimeException("此账号已经注册过了");
             }
 
-            ZCode zCode=accessBackMapper.findCode(map);
+            Code zCode=accessBackMapper.findCode(map);
             if(zCode==null){
                 throw new RuntimeException("请先获取验证码");
             }
@@ -57,7 +57,7 @@ public class AccessBackServiceImpl implements AccessBackService {
             String code=sendMailUtil.send(email);
 
             //保存到数据库
-            ZCode zCode =new ZCode();
+            Code zCode =new Code();
             zCode.setId(UUID.randomUUID().toString());
             zCode.setCode(code);
             zCode.setMail(email);
@@ -73,9 +73,9 @@ public class AccessBackServiceImpl implements AccessBackService {
     }
 
     @Override
-    public ZUser login(ZUser zUser) {
+    public User login(User zUser) {
         try{
-            ZUser user = accessBackMapper.login(zUser);
+            User user = accessBackMapper.login(zUser);
             if(user==null){
                 throw new RuntimeException("用户名或密码错误");
             }
@@ -86,10 +86,10 @@ public class AccessBackServiceImpl implements AccessBackService {
     }
 
     @Override
-    public ZUser updateZUser(ZUser zUser) {
+    public User updateUser(User zUser) {
         try{
-            accessBackMapper.updateZUser(zUser);
-            return accessBackMapper.findZUserById(zUser.getId());
+            accessBackMapper.updateUser(zUser);
+            return accessBackMapper.findUserById(zUser.getId());
         }catch (Exception e){
             throw new RuntimeException(e.getMessage());
         }
@@ -108,11 +108,11 @@ public class AccessBackServiceImpl implements AccessBackService {
     }
 
     @Transactional
-    public void updatePassword(ZUser zUser) {
+    public void updatePassword(User zUser) {
         try{
             Map<String ,Object> map = new HashMap<String ,Object>();
             map.put("mail",zUser.getEmail());
-            ZCode zCode=accessBackMapper.findCode(map);
+            Code zCode=accessBackMapper.findCode(map);
             if(zCode==null){
                 throw new RuntimeException("请先获取验证码");
             }
@@ -121,12 +121,12 @@ public class AccessBackServiceImpl implements AccessBackService {
             }
             accessBackMapper.updateCode(zCode);
 
-            ZUser user=accessBackMapper.findZUserByEmail(map);
+            User user=accessBackMapper.findUserByEmail(map);
             if(user==null){
                 throw new RuntimeException("用户不存在");
             }
             user.setPassword(zUser.getPassword());
-            accessBackMapper.updateZUser(user);
+            accessBackMapper.updateUser(user);
         }catch (Exception e){
             throw new RuntimeException(e.getMessage());
         }
@@ -134,21 +134,21 @@ public class AccessBackServiceImpl implements AccessBackService {
 
 
     @Transactional
-    public Map<String,Object> findOrder(ZOrder zOrder) {
+    public Map<String,Object> findOrder(Order zOrder) {
         zOrder.setPage(pageUtil.getPage(zOrder.getPage(),zOrder.getPageSize()));
 
         Map<String,Object> returnMap = new HashMap<String,Object>();
-        List<ZOrder> list=accessBackMapper.findOrder(zOrder);
-        List<ZOrder> returnList =new ArrayList<ZOrder>();
-        for (ZOrder order:list) {
-            if("0".equals(order.getStatus())){
-                order.setStatus("未支付");
-            }else if("1".equals(order.getStatus())){
-                order.setStatus("已支付");
-            }else if("-1".equals(order.getStatus())){
-                order.setStatus("已取消");
-            }else if("2".equals(order.getStatus())){
-                order.setStatus("已退款");
+        List<Order> list=accessBackMapper.findOrder(zOrder);
+        List<Order> returnList =new ArrayList<Order>();
+        for (Order order:list) {
+            if("WAIT_BUYER_PAY".equals(order.getStatus())){
+                order.setStatus("交易创建，等待买家付款");
+            }else if("TRADE_CLOSED".equals(order.getStatus())){
+                order.setStatus("未付款交易超时关闭，或支付完成后全额退款");
+            }else if("TRADE_SUCCESS".equals(order.getStatus())){
+                order.setStatus("交易支付成功");
+            }else if("TRADE_FINISHED".equals(order.getStatus())){
+                order.setStatus("交易结束，不可退款");
             }
             returnList.add(order);
         }
@@ -161,7 +161,7 @@ public class AccessBackServiceImpl implements AccessBackService {
     }
 
     @Transactional
-    public Map<String,Object> findOrderDetail(ZOrderDetail zOrderDetail) {
+    public Map<String,Object> findOrderDetail(OrderDetail zOrderDetail) {
         zOrderDetail.setPage(pageUtil.getPage(zOrderDetail.getPage(),zOrderDetail.getPageSize()));
 
         Map<String,Object> returnMap = new HashMap<String,Object>();
@@ -171,20 +171,20 @@ public class AccessBackServiceImpl implements AccessBackService {
     }
 
     @Override
-    public Map<String, Object> findZUser(ZUser zUser) {
+    public Map<String, Object> findUser(User zUser) {
         zUser.setPage(pageUtil.getPage(zUser.getPage(),zUser.getPageSize()));
 
         Map<String,Object> returnMap = new HashMap<String,Object>();
-        returnMap.put("dataList",accessBackMapper.findZUser(zUser));
-        returnMap.put("count",accessBackMapper.findZUserCount(zUser));
+        returnMap.put("dataList",accessBackMapper.findUser(zUser));
+        returnMap.put("count",accessBackMapper.findUserCount(zUser));
         return returnMap;
     }
 
     @Override
-    public void deleteZUser(ZUser zUser) {
+    public void deleteUser(User zUser) {
         String[] r=zUser.getId().split(",");
         for (int i = 0; i < r.length; i++) {
-            accessBackMapper.deleteZUser(r[i]);
+            accessBackMapper.deleteUser(r[i]);
         }
 
     }

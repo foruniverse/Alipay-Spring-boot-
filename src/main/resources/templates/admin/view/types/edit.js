@@ -74,25 +74,16 @@ layui.use(['laydate', 'element', 'laypage', 'layer', 'form'], function () {
                             ${item.orderno}
                         </td>
                         <td>
-                            ${item.hotel}
-                        </td>
-                        <td>
-                            ${item.price}
+                            ${item.name}
                         </td>
                         <td>
                             ${item.room}
                         </td>
                         <td>
-                            ${item.ordertime}
-                        </td>
-                        <td>
-                            ${item.name}
-                        </td>
-                        <td>
                             ${item.roomtype}
                         </td>
                         <td>
-                            ${item.num}
+                            ${item.price}
                         </td>
                         <td>
                             ${item.remark}

@@ -1,30 +1,30 @@
 package com.demo.springboot.helloworld.service;
 
 
-import com.demo.springboot.helloworld.entity.*;
+import com.demo.springboot.helloworld.common.domain.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
 public interface AccessBackService {
 
-    void regist(ZUser zUser);
+    void regist(User zUser);
 
     void getCode(String email);
 
-    ZUser login(ZUser zUser);
+    User login(User zUser);
 
-    ZUser updateZUser(ZUser zUser);
+    User updateUser(User zUser);
 
     Map<String,Object> uploadPhoto(MultipartFile file) throws Exception;
 
-    void updatePassword(ZUser zUser);
+    void updatePassword(User zUser);
 
-    Map<String,Object> findOrder(ZOrder zOrder);
+    Map<String,Object> findOrder(Order zOrder);
 
-    Map<String,Object> findOrderDetail(ZOrderDetail zOrderDetail);
+    Map<String,Object> findOrderDetail(OrderDetail zOrderDetail);
 
-    Map<String,Object> findZUser(ZUser zUser);
+    Map<String,Object> findUser(User zUser);
 
-    void deleteZUser(ZUser zUser);
+    void deleteUser(User zUser);
 }
