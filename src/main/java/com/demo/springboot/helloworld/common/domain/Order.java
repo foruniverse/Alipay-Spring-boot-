@@ -1,5 +1,9 @@
 package com.demo.springboot.helloworld.common.domain;
-
+/*
+编写人:
+编写功能:订单
+编写时间:
+*/
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;

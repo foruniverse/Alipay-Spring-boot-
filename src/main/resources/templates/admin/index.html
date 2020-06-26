@@ -95,6 +95,7 @@
       document.getElementById("idname").style.display="none";
     }
     document.getElementById("role").innerHTML=localStorage.getItem("name");
+    // document.getElementById("role").innerHTML=localStorage.getItem("id");
     $("#xg").click(function(){
       layer.open({
       type: 2,
@@ -123,11 +124,11 @@
         title: '订单查看',
         shadeClose: true,
         shade: false,
-        maxmin: true, //开启最大化最小化按钮
-        area: ['1200px', '600px'],
-        content: 'view/types/list.html'
-      });
-    })
+  maxmin: true, //开启最大化最小化按钮
+  area: ['1200px', '600px'],
+  content: 'view/types/list.html'
+  });
+  })
   </script>
 </body>
 

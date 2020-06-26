@@ -32,6 +32,12 @@
     <select id="findUserById" resultType="com.demo.springboot.helloworld.common.domain.User" parameterType="java.lang.String">
         select  * from user  where id=#{id}
     </select>
+    <select id="selectid" resultType="com.demo.springboot.helloworld.common.domain.User" parameterType="java.lang.String">
+        select  * from user  where id=#{id}
+    </select>
+    <select id="selOrderById" resultType="com.demo.springboot.helloworld.common.domain.Order" parameterType="java.lang.String">
+        select  * from order_info  where uid=#{id}
+    </select>
 
 
     <update id="updateUser"  parameterType="com.demo.springboot.helloworld.common.domain.User">

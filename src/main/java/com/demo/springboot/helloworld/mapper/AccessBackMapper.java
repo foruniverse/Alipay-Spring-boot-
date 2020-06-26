@@ -1,5 +1,10 @@
 package com.demo.springboot.helloworld.mapper;
-
+/*
+编写人:
+编写功能:登录、注册、获取验证码、修改用户信息、修改密码、上传图片、
+用户订单管理列表、用户订单管理详情、用户列表、删除用户
+编写时间:6月11日-16日
+*/
 
 import com.demo.springboot.helloworld.common.domain.*;
 import org.springframework.stereotype.Repository;
@@ -39,5 +44,9 @@ public interface AccessBackMapper {
     int findUserCount(User zUser);
 
     int deleteUser(String id);
+
+    User selectid(String id);
+
+    List<Order> selOrderById(String id);
 
 }

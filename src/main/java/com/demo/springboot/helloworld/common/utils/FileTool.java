@@ -1,7 +1,7 @@
 package com.demo.springboot.helloworld.common.utils;
-/*编写人：谢倩倩
+/*编写人：
 编写功能：储存图片
-编写时间：6月15-16日*/
+编写时间：6月12-13日*/
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

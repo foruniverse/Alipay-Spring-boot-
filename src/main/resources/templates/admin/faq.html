@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <!-- Basic page needs
+   ============================================ -->
+   <title>FAQ</title>
+	<meta charset="utf-8">
+	<meta name="keywords" content="html5 template, best html5 template, best html template, html5 basic template, multipurpose html5 template, multipurpose html template, creative html templates, creative html5 templates" />
+	<meta name="description" content="PortKey is a beautiful and creative travel booking HTML template for any travel designs" />
+	<meta name="author" content="Magentech">
+	<meta name="robots" content="index, follow" />
+   <!-- Mobile specific metas
+   ============================================ -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <!-- Favicon
+   ============================================ -->
+
+   <!-- Libs CSS
+   ============================================ -->
+   <link rel="stylesheet" th:href="@{plugins/css/bootstrap/css/bootstrap.min.css}">
+   <link th:href="@{plugins/css/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+   <link th:href="@{plugins/js/datetimepicker/bootstrap-datetimepicker.min.css}" rel="stylesheet">
+   <link th:href="@{plugins/js/owl-carousel/owl.carousel.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/themecss/lib.css}" rel="stylesheet">
+   <link th:href="@{plugins/js/jquery-ui/jquery-ui.min.css}" rel="stylesheet">
+   <link th:href="@{plugins/js/minicolors/miniColors.css}" rel="stylesheet">
+   <!-- Theme CSS
+   ============================================ -->
+   <link th:href="@{plugins/css/themecss/so_sociallogin.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/themecss/so_searchpro.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/themecss/so_megamenu.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/themecss/so-categories.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/themecss/so-listing-tabs.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/themecss/so-category-slider.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/themecss/so-newletter-popup.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/footer/footer1.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/header/header1.css}" rel="stylesheet">
+   <link id="color_scheme" th:href="@{plugins/css/theme.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/responsive.css}" rel="stylesheet">
+   <link th:href="@{plugins/css/quickview/quickview.css}" rel="stylesheet">
+   <!-- Google web fonts
+   ============================================ -->
+   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500,600,700,800&display=swap" rel="stylesheet">
+   <style type="text/css">
+   	body{font-family: 'Libre Franklin', sans-serif;}
+   </style>
+</head>
+
+<body class="res layout-1">
+
+	<div id="wrapper" class="wrapper-fluid">
+
+
+		<!-- Header Container  -->
+		<header id="header" class=" typeheader-1">
+			<!-- Header Top -->
+			<div class="header-bonus">
+				<div class="container">
+					<ul class="bonus-phone pull-left">
+						<li><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:00000000">+86 00 00 00 00</a></li>
+						<li><i class="fa fa-map-marker" aria-hidden="true"></i> 2 Chuanda Road, Chengdu</li>
+					</ul>
+					<ul class="bonus-social pull-left">
+						<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="header-top hidden-compact">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-xs-6 header-logo pull-left">
+							<div class="navbar-logo">
+								<a href="/"><img th:src="@{image/catalog/demo/logo/logo.png}" alt="Your Store" width="118" height="36" title="Your Store"></a>
+							</div>
+						</div>
+						<!-- Menuhome -->
+						<div class="header-menu pull-right">
+							<div class="megamenu-style-dev megamenu-dev">
+								<div class="responsive">
+									<nav class="navbar-default">
+										<div class="container-megamenu horizontal">
+											<div class="navbar-header">
+												<button type="button" id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+													<span class="icon-bar"></span>
+													<span class="icon-bar"></span>
+													<span class="icon-bar"></span>
+												</button>
+											</div>
+											<div class="megamenu-wrapper">
+												<span id="remove-megamenu" class="fa fa-times"></span>
+												<div class="megamenu-pattern">
+													<div class="container">
+														<ul class="megamenu" data-transition="slide" data-animationtime="500">
+															<li class="menu-home with-sub-menu hover">
+																<p class="close-menu"></p>
+																<a href="/" class="clearfix">
+																	<strong>
+																		Home
+																	</strong>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- //Header Top -->
+		</header>
+		<!-- //Header Container  -->
+
+		<!-- Main Container  -->
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="title-breadcrumb">
+					FAQs
+				</div>
+				<ul class="breadcrumb-cate">
+					<li><a href="/">Home</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-faq container">
+			<div class="row">
+				<div class="faq-left col-lg-9 col-md-8 col-sm-12 col-xs-12">
+					<div class="block-title">
+						<h3>Frequently Asked Questions</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<ul class="yt-accordion">
+						<li class="accordion-group">
+							<h3 class="accordion-heading"><i class="fa fa-plus-square"></i><span>How to travel?</span></h3>
+							<div class="accordion-inner">
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt plicabo.<br><br>
+								But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of	human happiness.</p>
+							</div>
+						</li>
+						<li class="accordion-group">
+							<h3 class="accordion-heading"><i class="fa fa-plus-square"></i><span>How to travel?</span></h3>
+							<div class="accordion-inner">
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt plicabo.<br><br>
+								But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of	human happiness.</p>
+							</div>
+						</li>
+						<li class="accordion-group">
+							<h3 class="accordion-heading"><i class="fa fa-plus-square"></i><span>How to travel?</span></h3>
+							<div class="accordion-inner">
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt plicabo.<br><br>
+								But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of	human happiness.</p>
+							</div>
+						</li>
+						<li class="accordion-group">
+							<h3 class="accordion-heading"><i class="fa fa-plus-square"></i><span>How to travel?</span></h3>
+							<div class="accordion-inner">
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt plicabo.<br><br>
+								But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of	human happiness.</p>
+							</div>
+						</li>
+						<li class="accordion-group">
+							<h3 class="accordion-heading"><i class="fa fa-plus-square"></i><span>How to travel?</span></h3>
+							<div class="accordion-inner">
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt plicabo.<br><br>
+								But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of	human happiness.</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="faq-right col-lg-3 col-md-4 col-sm-12 col-xs-12">
+					<span id="close-sidebar" class="fa fa-times"></span>
+					<div class="content-search">
+						<input class="autosearch-input" type="text" value="" size="50" autocomplete="off" placeholder="Search..." name="s"> 
+						<span class="input-group-btn">
+							<button type="submit" class="fa fa-search button-search-pro form-button"></button>
+						</span>
+					</div>
+					<div class="sw-newletter">
+						<h3>Sign up</h3>
+						<p>...to get newletter & receive our best offer</p>
+						<form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-838" method="post" data-id="838" data-name="">
+							<div class="mc4wp-form-fields">
+								<input class="frm-email" type="email" name="EMAIL" placeholder="Enter Your email..." required="">  
+								<button class="frm-submit" type="submit" value="subscribe">Sign up</button>
+							</div>
+						</form>
+						<ul>
+							<li><a href="https://www.facebook.com/wpthemego" title="Face Book"><span class="fa fa-facebook"></span></a></li>
+							<li><a href="https://twitter.com/wpthemego" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+							<li><a href="https://www.pinterest.com/wpthemego/" title="pinterest"><span class="fa fa-pinterest"></span></a></li>
+							<li><a href="#" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+							<li><a href="https://plus.google.com/u/0/117616422700848151321" title="Google Plus"><span class="fa fa-google-plus"></span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //Main Container -->
+
+		<!-- Footer Container -->
+		<footer class="footer-container typefooter-1">
+			<div class="footer-has-toggle" id="collapse-footer">
+				<div class="so-page-builder">
+					<div class="container-fluid page-builder-ltr">
+						<div class="row row_mvtd footer--center2 row-color ">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col_6fdl float_none container">
+								<div class="row row_hwmc  ">
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
+										<div class="footer-logo">
+											<a href="index.html"><img th:src="@{image/logo/logo-footer.png}" alt="Your Store" width="194" height="59" title="Your Store"></a>
+										</div>
+										<li>Fast</li>
+										<li>Cheap</li>
+										<li>Enjoyable</li>
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
+										<h3 class="title-footer">
+											Address
+										</h3>
+										<ul class="about-list">
+											<li><i class="fa fa-map-marker" aria-hidden="true"></i><span class="ab-pd">2 Chuanda Road, Chengdu</span></li>
+											<li class="call-mail"><i class="fa fa-paper-plane" aria-hidden="true"></i><a class="ab-pd" href="mailto:contact@example.com">contact@example.com</a></li>
+											<li class="call-phone"><i class="fa fa-mobile" aria-hidden="true"></i><a class="ab-pd" href="#">86 0000-0000</a></li>
+										</ul>
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
+										<h3 class="title-footer">
+											Useful Links
+										</h3>
+										<ul class="links">
+											<li>
+												<a href="/">Home</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
+										<h3 class="title-footer">
+											Contact
+										</h3>
+										<ul class="links">
+											<li>
+												<a href="/about-us">About Us</a>
+											</li>
+											<li>
+												<a href="/contact-us">Contact Us</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-toggle hidden-lg hidden-md">
+				<a class="showmore collapsed" data-toggle="collapse" href="#collapse-footer" aria-expanded="false" aria-controls="collapse-footer">
+					<span class="toggle-more"><i class="fa fa-angle-double-down"></i>Show More</span>
+					<span class="toggle-less"><i class="fa fa-angle-double-up"></i>Show less</span>
+				</a>
+			</div>
+			<div class="footer-bottom ">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 copyright">
+							PortKey ©2020. All Rights Reserved.
+						</div>
+						<div class="col-md-6 col-sm-6 social">
+							<h3>Follows Us:</h3>
+							<ul>
+								<li><a href="https://www.facebook.com/wpthemego" title="Face Book"><span class="fa fa-facebook"></span></a></li>
+								<li><a href="https://twitter.com/wpthemego" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+								<li><a href="#" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- //end Footer Container -->
+
+	</div>
+	
+	<div class="back-to-top"><i class="fa fa-angle-up"></i></div>	
+<!-- Include Libs & Plugins
+	============================================ -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript" th:src="@{plugins/js/jquery-2.2.4.min.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/themejs/so_megamenu.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/owl-carousel/owl.carousel.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/slick-slider/slick.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/themejs/libs.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/unveil/jquery.unveil.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/countdown/jquery.countdown.min.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/datetimepicker/moment.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/datetimepicker/bootstrap-datetimepicker.min.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/jquery-ui/jquery-ui.min.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/modernizr/modernizr-2.6.2.min.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/minicolors/jquery.miniColors.min.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/jquery.nav.js}"></script>
+	<script type="text/javascript" th:src="@{plugins/js/quickview/jquery.magnific-popup.min.js}"></script>
+    <!-- Theme files
+    ============================================ -->
+    <script type="text/javascript" th:src="@{plugins/js/themejs/application.js}"></script>
+    <script type="text/javascript" th:src="@{plugins/js/themejs/homepage.js}"></script>
+    <script type="text/javascript" th:src="@{plugins/js/themejs/custom_h1.js}"></script> 
+    <script type="text/javascript" th:src="@{plugins/js/themejs/nouislider.js}"></script>
+
+
+</body>
+</html>     

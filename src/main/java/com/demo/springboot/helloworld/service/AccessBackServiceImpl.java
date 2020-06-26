@@ -1,5 +1,10 @@
 package com.demo.springboot.helloworld.service;
-
+/*
+编写人:
+编写功能:登录、注册、获取验证码、修改用户信息、修改密码、上传图片、
+用户订单管理列表、用户订单管理详情、用户列表、删除用户
+编写时间:6月11日-16日
+*/
 
 import com.demo.springboot.helloworld.common.domain.*;
 import com.demo.springboot.helloworld.mapper.AccessBackMapper;
@@ -77,7 +82,10 @@ public class AccessBackServiceImpl implements AccessBackService {
         try{
             User user = accessBackMapper.login(zUser);
             if(user==null){
-                throw new RuntimeException("用户名或密码错误");
+                throw new RuntimeException("用户名或密码错误！");
+            }
+            if(user.getLevel()==0){
+                throw new RuntimeException("该账户已被禁用！");
             }
             return user;
         }catch (Exception e){
@@ -187,6 +195,16 @@ public class AccessBackServiceImpl implements AccessBackService {
             accessBackMapper.deleteUser(r[i]);
         }
 
+    }
+
+    @Override
+    public User selectUser(String id) throws Exception {
+       return accessBackMapper.selectid(id);
+    }
+
+    @Override
+    public List<Order> selOrderById(String id) {
+        return accessBackMapper.selOrderById(id);
     }
 
 }

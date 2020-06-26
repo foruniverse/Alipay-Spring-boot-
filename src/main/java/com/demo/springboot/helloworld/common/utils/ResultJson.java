@@ -1,5 +1,5 @@
 package com.demo.springboot.helloworld.common.utils;
-/*编写人：谢倩倩
+/*编写人：
 编写功能：返回的通用类
 编写时间：6月15-16日*/
 public class ResultJson {

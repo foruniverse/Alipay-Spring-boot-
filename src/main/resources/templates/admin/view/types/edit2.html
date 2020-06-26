@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        酒店辅助订购系统
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../css/x-admin.css" media="all">
+</head>
+
+<body>
+
+    <div class="x-body">
+
+        <table class="layui-table dataList">
+            <thead>
+                <tr>
+                    <th>
+                        订单号
+                    </th>
+                    <th>
+                        用户名
+                    </th>
+                    <th>
+                        房间号
+                    </th>
+                    <th>
+                        房型
+                    </th>
+                    <th>
+                        单价
+                    </th>
+                    <th>
+                        备注
+                    </th>
+
+                    <!-- <th>
+                        操作
+                    </th> -->
+                </tr>
+            </thead>
+            <tbody id="tablseList">
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+<!--    <script src="../../lib/layui/layui.js" charset="utf-8"></script>-->
+<!--    <script src="../../js/x-layui.js" charset="utf-8"></script>-->
+    <script src="../../js/jquery.min.js"></script>
+<!--    <script src="../../js/common.js"></script>-->
+    <script src="../../js/style.js"></script>
+<!--    <script src="./edit.js"></script>-->
+
+<script>
+    function GetUrlParms() {
+        var args = new Object();
+        var query = location.search.substring(1); //获取查询串
+        var pairs = query.split("&"); //在逗号处断开
+        for (var i = 0; i < pairs.length; i++) {
+            var pos = pairs[i].indexOf('='); //查找name=value
+            if (pos == -1) continue; //如果没有找到就跳过
+            var argname = pairs[i].substring(0, pos); //提取name
+            var value = pairs[i].substring(pos + 1); //提取value
+            args[argname] = unescape(value); //存为属性
+        }
+        return args;
+    }
+    $(document).ready(function () {
+        var args = new Object();
+        args = GetUrlParms();//获取参数数组
+        //如果要查找参数key:
+        if (args["orderno"] != undefined) {
+            //如果要查找参数key:
+            var orderno = args["orderno"];
+            $.ajax({
+                url:"http://127.0.0.1:8585/back/findOrderDetail?orderno="+orderno+"&page=1&pageSize=10",
+                type: "post",
+                success: function(d) {
+                    if(d!=null){
+                        var data=d.data.dataList;
+                        console.log(d)
+                        console.log(data)
+                        for (var i = 0; i < data.length; i++) {
+                            $("#tablseList").append(
+                                "<tr><td>"
+                                + data[i].orderno + "</td><td>"
+                                + data[i].name + "</td><td>"
+                                +data[i].room +"</td><td>"
+                                + data[i].roomtype + "</td><td>"
+                                +data[i].price + "</td><td>"
+                                +data[i].remark + "</td></tr>"
+                            );
+                        }
+                    }
+
+                }
+            });
+        }
+
+    });
+</script>
+</body>
+
+</html>

@@ -1,4 +1,9 @@
 package com.demo.springboot.helloworld.common.domain;
+/*
+编写人:
+编写功能:验证码
+编写时间:
+*/
 
 import java.util.Date;
 
