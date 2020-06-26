@@ -59,7 +59,7 @@ INSERT INTO `order_detail` VALUES ('2', '52231', '2', '102', '大床房', '148.0
 DROP TABLE IF EXISTS `order_info`;
 CREATE TABLE `order_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderno` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `orderno` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ,
   `uid` int(11) DEFAULT NULL,
   `hotel_id` int(11) DEFAULT NULL,
   `hotel` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,

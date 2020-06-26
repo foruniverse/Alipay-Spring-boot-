@@ -49,4 +49,15 @@ public interface AccessBackMapper {
 
     List<Order> selOrderById(String id);
 
+    //by hcy
+    int insertOrderInfo(Order order);
+
+    // by hcy 更新订单状态
+    void updateOrderState(Order order);
+
+    //by hcy 插入detaildingdan
+    void insertOrderDetail(OrderDetail orderDetail);
+
+    void updateOrderDetailState(OrderDetail orderDetail);
+
 }

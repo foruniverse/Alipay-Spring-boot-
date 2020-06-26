@@ -199,7 +199,7 @@ public class AccessBackServiceImpl implements AccessBackService {
 
     @Override
     public User selectUser(String id) throws Exception {
-       return accessBackMapper.selectid(id);
+        return accessBackMapper.selectid(id);
     }
 
     @Override
@@ -207,4 +207,26 @@ public class AccessBackServiceImpl implements AccessBackService {
         return accessBackMapper.selOrderById(id);
     }
 
+
+    //--------------------------------------------by hcy
+    @Override
+    public int insertOrderInfo(Order order) {
+        return accessBackMapper.insertOrderInfo(order);
+    }
+
+    @Override
+    public void updateOrderState(Order order) {
+        accessBackMapper.updateOrderState(order);
+    }
+
+    @Override
+    public void insertOrderDetail(OrderDetail orderDetail) {
+        accessBackMapper.insertOrderDetail(orderDetail);
+    }
+
+    @Override
+    public void updateOrderDetailState(OrderDetail orderDetail) {
+        accessBackMapper.updateOrderDetailState(orderDetail);
+    }
+//--------------------------------------------by hcy
 }

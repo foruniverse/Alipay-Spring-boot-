@@ -28,13 +28,23 @@ public interface AccessBackService {
 
     Map<String,Object> findOrder(Order zOrder);
 
-    Map<String,Object> findOrderDetail(OrderDetail zOrderDetail);
+    Map<String, Object> findOrderDetail(OrderDetail zOrderDetail);
 
-    Map<String,Object> findUser(User zUser);
+    Map<String, Object> findUser(User zUser);
 
     void deleteUser(User zUser);
 
     User selectUser(String id) throws Exception;
 
     List<Order> selOrderById(String id);
+
+    // -------------------------------------------hcy
+    int insertOrderInfo(Order order);
+
+    void updateOrderState(Order order);
+
+    void insertOrderDetail(OrderDetail orderDetail);
+
+    void updateOrderDetailState(OrderDetail orderDetail);
+//--------------------------------------------hcy
 }

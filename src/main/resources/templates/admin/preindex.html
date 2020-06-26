@@ -4,48 +4,56 @@
 <head>
 	<!-- Basic page needs
 		============================================ -->
-		<title>PortKey</title>
-		<meta charset="utf-8">
-		<meta name="keywords" content="html5 template, best html5 template, best html template, html5 basic template, multipurpose html5 template, multipurpose html template, creative html templates, creative html5 templates" />
-		<meta name="description" content="PortKey is a beautiful and creative travel booking HTML template for any travel designs" />
-		<meta name="author" content="Magentech">
-		<meta name="robots" content="index, follow" />
+	<title>PortKey</title>
+	<meta charset="utf-8">
+	<meta name="keywords"
+		  content="html5 template, best html5 template, best html template, html5 basic template, multipurpose html5 template, multipurpose html template, creative html templates, creative html5 templates"/>
+	<meta name="description"
+		  content="PortKey is a beautiful and creative travel booking HTML template for any travel designs"/>
+	<meta name="author" content="Magentech">
+	<meta name="robots" content="index, follow"/>
 	<!-- Mobile specific metas
-		============================================ -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        ============================================ -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<!-- Favicon
-		============================================ -->
+        ============================================ -->
 
 	<!-- Libs CSS
-		============================================ -->
-		<link rel="stylesheet" th:href="@{plugins/css/bootstrap/css/bootstrap.min.css}">
-		<link th:href="@{plugins/css/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-		<link th:href="@{plugins/js/datetimepicker/bootstrap-datetimepicker.min.css}" rel="stylesheet">
-		<link th:href="@{plugins/js/owl-carousel/owl.carousel.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/themecss/lib.css}" rel="stylesheet">
-		<link th:href="@{plugins/js/jquery-ui/jquery-ui.min.css}" rel="stylesheet">
-		<link th:href="@{plugins/js/minicolors/miniColors.css}" rel="stylesheet">
-		<link th:href="@{plugins/js/slick-slider/slick.css}" rel="stylesheet">
+        ============================================ -->
+	<link rel="stylesheet" th:href="@{/admin/static/plugins/css/bootstrap/css/bootstrap.min.css}">
+	<link th:href="@{../../static/plugins/css/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+	<link th:href="@{plugins/js/datetimepicker/bootstrap-datetimepicker.min.css}" rel="stylesheet">
+	<link th:href="@{plugins/js/owl-carousel/owl.carousel.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/themecss/lib.css}" rel="stylesheet">
+	<link th:href="@{plugins/js/jquery-ui/jquery-ui.min.css}" rel="stylesheet">
+	<link th:href="@{plugins/js/minicolors/miniColors.css}" rel="stylesheet">
+	<link th:href="@{/static/plugins/js/slick-slider/slick.css}" rel="stylesheet">
 	<!-- Theme CSS
-		============================================ -->
+        ============================================ -->
 	<link th:href="@{plugins/css/themecss/so_sociallogin.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/themecss/so_searchpro.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/themecss/so_megamenu.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/themecss/so-listing-tabs.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/themecss/so-newletter-popup.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/footer/footer2.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/header/header2.css}" rel="stylesheet">
-		<link id="color_scheme" th:href="@{plugins/css/home2.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/responsive.css}" rel="stylesheet">
-		<link th:href="@{plugins/css/quickview/quickview.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/themecss/so_searchpro.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/themecss/so_megamenu.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/themecss/so-listing-tabs.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/themecss/so-newletter-popup.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/footer/footer2.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/header/header2.css}" rel="stylesheet">
+	<link id="color_scheme" th:href="@{plugins/css/home2.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/responsive.css}" rel="stylesheet">
+	<link th:href="@{plugins/css/quickview/quickview.css}" rel="stylesheet">
 	<!-- Google web fonts
-		============================================ -->
-		<link href="https://fonts.googleapis.com/css?family=Poppins:600,700,800&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500,600,700,800&display=swap" rel="stylesheet">
-		<style type="text/css">
-		body{font-family: 'Libre Franklin', sans-serif;}
+        ============================================ -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600,700,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500,600,700,800&display=swap"
+		  rel="stylesheet">
+	<style type="text/css">
+		body {
+			font-family: 'Libre Franklin', sans-serif;
+		}
 	</style>
-	<script src="js/common.js"></script>
+	<script th:src="@{templates/admin/js/common.js}"></script>
+	<script th:src="@{admin/js/x-layui.js}" charset="utf-8"></script>
+
+
 </head>
 
 <body class="common-home ltr layout-2">

@@ -3,6 +3,10 @@ package com.demo.springboot.helloworld.common.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ by hcy
+ 2020-6-27
+ */
 public class RoomExample {
     protected String orderByClause;
 
@@ -284,6 +288,76 @@ public class RoomExample {
             return (Criteria) this;
         }
 
+        public Criteria andRoomtypeIsNull() {
+            addCriterion("roomtype is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeIsNotNull() {
+            addCriterion("roomtype is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeEqualTo(String value) {
+            addCriterion("roomtype =", value, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeNotEqualTo(String value) {
+            addCriterion("roomtype <>", value, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeGreaterThan(String value) {
+            addCriterion("roomtype >", value, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeGreaterThanOrEqualTo(String value) {
+            addCriterion("roomtype >=", value, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeLessThan(String value) {
+            addCriterion("roomtype <", value, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeLessThanOrEqualTo(String value) {
+            addCriterion("roomtype <=", value, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeLike(String value) {
+            addCriterion("roomtype like", value, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeNotLike(String value) {
+            addCriterion("roomtype not like", value, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeIn(List<String> values) {
+            addCriterion("roomtype in", values, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeNotIn(List<String> values) {
+            addCriterion("roomtype not in", values, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeBetween(String value1, String value2) {
+            addCriterion("roomtype between", value1, value2, "roomtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomtypeNotBetween(String value1, String value2) {
+            addCriterion("roomtype not between", value1, value2, "roomtype");
+            return (Criteria) this;
+        }
+
         public Criteria andRoomPriceIsNull() {
             addCriterion("room_price is null");
             return (Criteria) this;
@@ -294,52 +368,52 @@ public class RoomExample {
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceEqualTo(Integer value) {
+        public Criteria andRoomPriceEqualTo(Double value) {
             addCriterion("room_price =", value, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceNotEqualTo(Integer value) {
+        public Criteria andRoomPriceNotEqualTo(Double value) {
             addCriterion("room_price <>", value, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceGreaterThan(Integer value) {
+        public Criteria andRoomPriceGreaterThan(Double value) {
             addCriterion("room_price >", value, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceGreaterThanOrEqualTo(Integer value) {
+        public Criteria andRoomPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("room_price >=", value, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceLessThan(Integer value) {
+        public Criteria andRoomPriceLessThan(Double value) {
             addCriterion("room_price <", value, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceLessThanOrEqualTo(Integer value) {
+        public Criteria andRoomPriceLessThanOrEqualTo(Double value) {
             addCriterion("room_price <=", value, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceIn(List<Integer> values) {
+        public Criteria andRoomPriceIn(List<Double> values) {
             addCriterion("room_price in", values, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceNotIn(List<Integer> values) {
+        public Criteria andRoomPriceNotIn(List<Double> values) {
             addCriterion("room_price not in", values, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceBetween(Integer value1, Integer value2) {
+        public Criteria andRoomPriceBetween(Double value1, Double value2) {
             addCriterion("room_price between", value1, value2, "roomPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRoomPriceNotBetween(Integer value1, Integer value2) {
+        public Criteria andRoomPriceNotBetween(Double value1, Double value2) {
             addCriterion("room_price not between", value1, value2, "roomPrice");
             return (Criteria) this;
         }
