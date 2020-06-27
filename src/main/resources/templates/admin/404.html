@@ -17,28 +17,30 @@
 	
 <!-- Libs CSS
 	============================================ -->
-	<link rel="stylesheet" th:href="@{plugins/css/bootstrap/css/bootstrap.min.css}">
-	<link th:href="@{plugins/css/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-	<link th:href="@{plugins/js/datetimepicker/bootstrap-datetimepicker.min.css}" rel="stylesheet">
-	<link th:href="@{plugins/js/owl-carousel/owl.carousel.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/themecss/lib.css}" rel="stylesheet">
-	<link th:href="@{plugins/js/jquery-ui/jquery-ui.min.css}" rel="stylesheet">
-	<link th:href="@{plugins/js/minicolors/miniColors.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/plugins/css/bootstrap/css/bootstrap.min.css}">
+	<link th:href="@{/plugins/css/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+	<link th:href="@{/plugins/js/datetimepicker/bootstrap-datetimepicker.min.css}" rel="stylesheet">
+	<link th:href="@{/plugins/js/owl-carousel/owl.carousel.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/lib.css}" rel="stylesheet">
+	<link th:href="@{/plugins/js/jquery-ui/jquery-ui.min.css}" rel="stylesheet">
+	<link th:href="@{/plugins/js/minicolors/miniColors.css}" rel="stylesheet">
 <!-- Theme CSS
 	============================================ -->
-	<link th:href="@{plugins/css/themecss/so_sociallogin.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/themecss/so_searchpro.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/themecss/so_megamenu.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/themecss/so-categories.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/themecss/so-listing-tabs.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/themecss/so-category-slider.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/themecss/so-newletter-popup.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/footer/footer1.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/header/header1.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/header/header2.css}" rel="stylesheet">
-	<link id="color_scheme" th:href="@{plugins/css/theme.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/responsive.css}" rel="stylesheet">
-	<link th:href="@{plugins/css/quickview/quickview.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so_sociallogin.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so_searchpro.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so_megamenu.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so-categories.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so-listing-tabs.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so-category-slider.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so-newletter-popup.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/footer/footer1.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/header/header1.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/header/header2.css}" rel="stylesheet">
+	<link id="color_scheme" th:href="@{/plugins/css/theme.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/responsive.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/quickview/quickview.css}" rel="stylesheet">
+	<script th:src="@{/admin/js/common.js}"></script>
+	<script th:src="@{/admin/js/x-layui.js}" charset="utf-8"></script>
 <!-- Google web fonts
 	============================================ -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
@@ -74,7 +76,7 @@
 					<div class="row">
 						<div class="col-lg-3 col-xs-6 header-logo pull-left">
 							<div class="navbar-logo">
-								<a href="/"><img th:src="@{image/catalog/demo/logo/logo.png}" alt="Your Store" width="118" height="36" title="Your Store"></a>
+								<a href="/"><img th:src="@{/plugins/image/catalog/demo/logo/logo.png}" alt="Your Store" width="118" height="36" title="Your Store"></a>
 							</div>
 						</div>
 						<!-- Menuhome -->
@@ -140,7 +142,7 @@
 								<div class="row row_hwmc  ">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
 										<div class="footer-logo">
-											<a href="adminindex.html"><img th:src="@{image/logo/logo-footer.png}" alt="Your Store" width="194" height="59" title="Your Store"></a>
+											<a href="adminindex.html"><img th:src="@{/plugins/image/logo/logo-footer.png}" alt="Your Store" width="194" height="59" title="Your Store"></a>
 										</div>
 										<li>Fast</li>
 										<li>Cheap</li>
@@ -223,28 +225,28 @@
 <!-- Include Libs & Plugins
 	============================================ -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" th:src="@{plugins/js/jquery-2.2.4.min.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/bootstrap.min.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/themejs/so_megamenu.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/owl-carousel/owl.carousel.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/slick-slider/slick.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/themejs/libs.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/unveil/jquery.unveil.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/countdown/jquery.countdown.min.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/datetimepicker/moment.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/datetimepicker/bootstrap-datetimepicker.min.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/jquery-ui/jquery-ui.min.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/modernizr/modernizr-2.6.2.min.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/minicolors/jquery.miniColors.min.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/jquery.nav.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/quickview/jquery.magnific-popup.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/jquery-2.2.4.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/so_megamenu.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/owl-carousel/owl.carousel.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/slick-slider/slick.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/libs.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/unveil/jquery.unveil.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/countdown/jquery.countdown.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/datetimepicker/moment.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/datetimepicker/bootstrap-datetimepicker.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/jquery-ui/jquery-ui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/modernizr/modernizr-2.6.2.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/minicolors/jquery.miniColors.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/jquery.nav.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/quickview/jquery.magnific-popup.min.js}"></script>
 <!-- Theme files
 	============================================ -->
-	<script type="text/javascript" th:src="@{plugins/js/themejs/application.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/themejs/homepage.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/themejs/custom_h1.js}"></script>
-	<script type="text/javascript" th:src="@{plugins/js/themejs/nouislider.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/application.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/homepage.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/custom_h1.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/nouislider.js}"></script>
 
 
 </body>

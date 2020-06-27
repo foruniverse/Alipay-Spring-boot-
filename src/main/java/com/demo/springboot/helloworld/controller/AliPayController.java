@@ -199,7 +199,7 @@ public class AliPayController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/return")
-    public String return_message(HttpServletRequest request, HttpServletResponse response , Model model) throws UnsupportedEncodingException {
+    public String return_message(HttpServletRequest request) throws UnsupportedEncodingException {
         System.out.println("return");
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();

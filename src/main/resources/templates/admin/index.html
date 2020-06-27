@@ -13,7 +13,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
-  <link rel="stylesheet" href="./css/x-admin.css" media="all">
+  <link rel="stylesheet" href="/admin/css/x-admin.css" media="all">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
           酒店辅助订票系统
         </a>
         <ul class="layui-nav" lay-filter="">
-          <li class="layui-nav-item"><img src="./images/logo.png" class="layui-circle"
+          <li class="layui-nav-item"><img src="/admin/images/logo.png" class="layui-circle"
               style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>
           <li class="layui-nav-item">
             <a id="role" style="min-width: 90px;" href="javascript:;"></a>
@@ -42,23 +42,38 @@
     <div class="layui-side layui-bg-black x-side">
       <div class="layui-side-scroll">
         <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="side">
+
+
+            <li class="layui-nav-item">
+                <a class="javascript:;" _href="/admin/preindex.html">
+                    <i class="layui-icon layui-icon-template-1" style="top: 3px;">&#xe656;</i><cite>酒店</cite>
+                </a>
+<!--                <dl class="layui-nav-child">-->
+<!--                    <dd id="idname">-->
+<!--                        <a href="javascript:;" _href="./preindex.html">-->
+<!--                            <cite>酒店首页</cite>-->
+<!--                        </a>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+            </li>
+
           <li class="layui-nav-item">
             <a class="javascript:;" href="javascript:;">
-              <i class="layui-icon" style="top: 3px;">&#xe630;</i><cite>首页</cite>
+              <i class="layui-icon" style="top: 3px;">&#xe630;</i><cite>管理员界面</cite>
             </a>
             <dl class="layui-nav-child">
                 <dd id="idname">
-                    <a href="javascript:;" _href="./view/types/list.html">
+                    <a href="javascript:;" _href="/admin/view/types/list.html">
                         <cite>订单管理</cite>
                     </a>
                 </dd>
                 <dd class="">
-                    <a href="javascript:;" _href="./view/user_manage/list.html">
+                    <a href="javascript:;" _href="/admin/view/user_manage/list.html">
                         <cite>用户管理</cite>
                     </a>
                 </dd>
                 <dd class="">
-                    <a href="javascript:;" _href="./view/user_manage/list.html">
+                    <a href="javascript:;" _href="/admin/view/user_manage/list.html">
                         <cite>权限管理</cite>
                     </a>
                 </dd>
@@ -68,29 +83,18 @@
 
             <li class="layui-nav-item">
                 <a class="javascript:;" href="javascript:;">
-                    <i class="layui-icon" style="top: 3px;">&#xe630;</i><cite>支付</cite>
+                    <i class="layui-icon" style="top: 3px;">&#xe657;</i><cite>支付</cite>
                 </a>
                 <dl class="layui-nav-child">
                     <dd id="idname">
-                        <a href="javascript:;" _href="./view/pay/list.html">
+                        <a href="javascript:;" _href="/admin/view/pay/list.html">
                             <cite>支付订单提交</cite>
                         </a>
                     </dd>
                 </dl>
             </li>
 
-            <li class="layui-nav-item">
-                <a class="javascript:;" href="javascript:;">
-                    <i class="layui-icon" style="top: 3px;">&#xe630;</i><cite>首页</cite>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd id="idname">
-                        <a href="javascript:;" _href="./view/preindex.html">
-                            <cite>首页</cite>
-                        </a>
-                    </dd>
-                </dl>
-            </li>
+
         </ul>
       </div>
     </div>
@@ -104,17 +108,17 @@
       </ul>
       <div class="layui-tab-content site-demo site-demo-body">
         <div class="layui-tab-item layui-show">
-          <iframe frameborder="0" src="./view/home.html" class="x-iframe"></iframe>
+          <iframe frameborder="0" src="/admin/preindex.html" class="x-iframe"></iframe>
         </div>
       </div>
     </div>
     <div class="site-mobile-shade">
     </div>
   </div>
-  <script src="./lib/layui/layui.js" charset="utf-8"></script>
-  <script src="./js/x-admin.js"></script>
-  <script src="./js/common.js"></script>
-  <script src="./js/style.js"></script>
+  <script src="/admin/lib/layui/layui.js" charset="utf-8"></script>
+  <script src="/admin/js/x-admin.js"></script>
+  <script src="/admin/js/common.js"></script>
+  <script src="/admin/js/style.js"></script>
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <script>
     if(localStorage.getItem("ulevel")==0){
