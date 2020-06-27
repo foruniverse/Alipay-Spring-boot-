@@ -7,7 +7,9 @@ public class Room {
 
     private Integer roomState;
 
-    private Integer roomPrice;
+    private String roomtype;
+
+    private Double roomPrice;
 
     public Integer getRoomId() {
         return roomId;
@@ -33,11 +35,24 @@ public class Room {
         this.roomState = roomState;
     }
 
-    public Integer getRoomPrice() {
+    public String getRoomtype() {
+        return roomtype;
+    }
+
+    public void setRoomtype(String roomtype) {
+        this.roomtype = roomtype == null ? null : roomtype.trim();
+    }
+
+    public Double getRoomPrice() {
         return roomPrice;
     }
 
-    public void setRoomPrice(Integer roomPrice) {
+    public void setRoomPrice(Double roomPrice) {
         this.roomPrice = roomPrice;
     }
 }
+
+/*
+ by hcy
+ 2020-6-27
+ */

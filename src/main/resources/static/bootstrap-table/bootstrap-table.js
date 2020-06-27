@@ -4217,7 +4217,7 @@
 	          currentTarget = _ref2.currentTarget;
 	      var $this = type === 'keypress' ? $(currentTarget) : $(currentTarget).parent();
 	      var $this_ = this.$header.find('th').eq($this.index());
-	      this.$header.add(this.$header_).find('span.order').remove();
+	      this.$header.add(this.$header_).find('templates.admin.order').remove();
 
 	      if (this.options.sortName === $this.data('field')) {
 	        this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
@@ -4225,14 +4225,14 @@
 	        this.options.sortName = $this.data('field');
 
 	        if (this.options.rememberOrder) {
-	          this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+	          this.options.sortOrder = $this.data('templates.admin.order') === 'asc' ? 'desc' : 'asc';
 	        } else {
 	          this.options.sortOrder = this.columns[this.fieldsColumnsIndex[$this.data('field')]].sortOrder || this.columns[this.fieldsColumnsIndex[$this.data('field')]].order;
 	        }
 	      }
 
 	      this.trigger('sort', this.options.sortName, this.options.sortOrder);
-	      $this.add($this_).data('order', this.options.sortOrder); // Assign the correct sortable arrow
+	      $this.add($this_).data('templates.admin.order', this.options.sortOrder); // Assign the correct sortable arrow
 
 	      this.getCaret();
 

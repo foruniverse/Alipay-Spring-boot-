@@ -9,21 +9,21 @@ var ip = onlineIp
 var url = ip + "/back/";
 // var login = url + "backLogin"
 var login = url + "login"
-var addZUser = url + "addZUser"
+var addUser = url + "addUser"
 var regist = url + "regist"
 var updatePassword = url + "updatePassword"
 
 var uploadPhoto = url+"uploadPhoto"
 
-var findZUser = url + "findZUser"
+var findUser = url + "findUser"
 
 var getCode = url + "getCode"
 
 var findBookCategory = url + 'findOrder'
-var addBookCategory = url + 'addZUser'
-var updateBookCategory = url + 'updateZUser'
+var addBookCategory = url + 'addUser'
+var updateBookCategory = url + 'updateUser'
 var lend = url + 'lend'
-var deleteBookCategory = url + 'deleteZUser'
+var deleteBookCategory = url + 'deleteUser'
 
 var findPress = url + "findOrderDetail"
 var addPress = url + 'addPress'

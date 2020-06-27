@@ -1,10 +1,12 @@
 package com.demo.springboot.helloworld.mapper;
+/*
+编写人:
+编写功能:登录、注册、获取验证码、修改用户信息、修改密码、上传图片、
+用户订单管理列表、用户订单管理详情、用户列表、删除用户
+编写时间:6月11日-16日
+*/
 
-
-import com.demo.springboot.helloworld.entity.ZCode;
-import com.demo.springboot.helloworld.entity.ZOrder;
-import com.demo.springboot.helloworld.entity.ZOrderDetail;
-import com.demo.springboot.helloworld.entity.ZUser;
+import com.demo.springboot.helloworld.common.domain.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,34 +15,49 @@ import java.util.Map;
 @Repository
 public interface AccessBackMapper {
 
-    ZCode findCode(Map<String,Object> map);
+    Code findCode(Map<String,Object> map);
 
-    void updateCode(ZCode zCode);
+    void updateCode(Code zCode);
 
-    void regist(ZUser zUser);
+    void regist(User zUser);
 
-    void getCode(ZCode zCode);
+    void getCode(Code zCode);
 
-    ZUser login(ZUser zUser);
+    User login(User zUser);
 
-    ZUser findZUserById(String id);
+    User findUserById(String id);
 
-    void updateZUser(ZUser zUser);
+    void updateUser(User zUser);
 
-    ZUser findZUserByEmail(Map<String,Object> map);
+    User findUserByEmail(Map<String,Object> map);
 
-    List<ZOrder> findOrder(ZOrder zOrder);
+    List<Order> findOrder(Order zOrder);
 
-    int findOrderCount(ZOrder zOrder);
+    int findOrderCount(Order zOrder);
 
-    List<ZOrderDetail> findOrderDetail(ZOrderDetail zOrderDetail);
+    List<OrderDetail> findOrderDetail(OrderDetail zOrderDetail);
 
-    int findOrderDetailCount(ZOrderDetail zOrderDetail);
+    int findOrderDetailCount(OrderDetail zOrderDetail);
 
-    List<ZUser> findZUser(ZUser zUser);
+    List<User> findUser(User zUser);
 
-    int findZUserCount(ZUser zUser);
+    int findUserCount(User zUser);
 
-    int deleteZUser(String id);
+    int deleteUser(String id);
+
+    User selectid(String id);
+
+    List<Order> selOrderById(String id);
+
+    //by hcy
+    int insertOrderInfo(Order order);
+
+    // by hcy 更新订单状态
+    void updateOrderState(Order order);
+
+    //by hcy 插入detaildingdan
+    void insertOrderDetail(OrderDetail orderDetail);
+
+    void updateOrderDetailState(OrderDetail orderDetail);
 
 }

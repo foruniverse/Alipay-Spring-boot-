@@ -62,7 +62,7 @@ layui.use(['laydate', 'element', 'laypage', 'layer', 'form'], function () {
             html += ` <tr>
                         <td>
                             ${item.bookno}
-                        </td>
+                        </td>    
                         <td>
                             ${item.bookname}
                         </td>

@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.springboot.helloworld.mapper.HotelMapper">
+    <resultMap id="BaseResultMap" type="com.demo.springboot.helloworld.common.domain.Hotel">
+        <id column="hotel_id" jdbcType="INTEGER" property="hotelId"/>
+        <result column="chain_id" jdbcType="INTEGER" property="chainId"/>
+        <result column="chain_name" jdbcType="VARCHAR" property="chainName"/>
+        <result column="brand_id" jdbcType="INTEGER" property="brandId"/>
+        <result column="brand_name" jdbcType="VARCHAR" property="brandName"/>
+        <result column="hotel_name" jdbcType="VARCHAR" property="hotelName"/>
+        <result column="hotel_formerly_name" jdbcType="VARCHAR" property="hotelFormerlyName"/>
+        <result column="hotel_translated_name" jdbcType="VARCHAR" property="hotelTranslatedName"/>
+        <result column="address_line1" jdbcType="VARCHAR" property="addressLine1"/>
+        <result column="address_line2" jdbcType="VARCHAR" property="addressLine2"/>
+        <result column="zipcode" jdbcType="INTEGER" property="zipcode"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="state1" jdbcType="VARCHAR" property="state1"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="country_iso_code" jdbcType="VARCHAR" property="countryIsoCode"/>
+        <result column="star_rating" jdbcType="INTEGER" property="starRating"/>
+        <result column="longtitude" jdbcType="DOUBLE" property="longtitude"/>
+        <result column="latitude" jdbcType="DOUBLE" property="latitude"/>
+        <result column="url1" jdbcType="VARCHAR" property="url1"/>
+        <result column="check_in" jdbcType="VARCHAR" property="checkIn"/>
+        <result column="check_out" jdbcType="VARCHAR" property="checkOut"/>
+        <result column="number_rooms" jdbcType="INTEGER" property="numberRooms"/>
+        <result column="number_floors" jdbcType="INTEGER" property="numberFloors"/>
+        <result column="year_opened" jdbcType="INTEGER" property="yearOpened"/>
+        <result column="year_renovaated" jdbcType="INTEGER" property="yearRenovaated"/>
+        <result column="photo1" jdbcType="VARCHAR" property="photo1"/>
+        <result column="photo2" jdbcType="VARCHAR" property="photo2"/>
+        <result column="photo3" jdbcType="VARCHAR" property="photo3"/>
+        <result column="photo4" jdbcType="VARCHAR" property="photo4"/>
+        <result column="photo5" jdbcType="VARCHAR" property="photo5"/>
+        <result column="overview" jdbcType="VARCHAR" property="overview"/>
+        <result column="rates_from" jdbcType="INTEGER" property="ratesFrom"/>
+        <result column="continent_id" jdbcType="INTEGER" property="continentId"/>
+        <result column="continent_name" jdbcType="VARCHAR" property="continentName"/>
+        <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+        <result column="country_id" jdbcType="INTEGER" property="countryId"/>
+        <result column="number_of_reviews" jdbcType="INTEGER" property="numberOfReviews"/>
+        <result column="rating_average" jdbcType="INTEGER" property="ratingAverage"/>
+        <result column="rates_currency" jdbcType="VARCHAR" property="ratesCurrency"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    hotel_id, chain_id, chain_name, brand_id, brand_name, hotel_name, hotel_formerly_name, 
+    hotel_translated_name, address_line1, address_line2, zipcode, city, state1, country, 
+    country_iso_code, star_rating, longtitude, latitude, url1, check_in, check_out, number_rooms, 
+    number_floors, year_opened, year_renovaated, photo1, photo2, photo3, photo4, photo5, 
+    overview, rates_from, continent_id, continent_name, city_id, country_id, number_of_reviews, 
+    rating_average, rates_currency
+  </sql>
+    <select id="selectByExample" parameterType="com.demo.springboot.helloworld.common.domain.HotelExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from hotel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from hotel
+        where hotel_id = #{hotelId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hotel
+    where hotel_id = #{hotelId,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.demo.springboot.helloworld.common.domain.HotelExample">
+        delete from hotel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.demo.springboot.helloworld.common.domain.Hotel">
+    insert into hotel (hotel_id, chain_id, chain_name, 
+      brand_id, brand_name, hotel_name, 
+      hotel_formerly_name, hotel_translated_name, 
+      address_line1, address_line2, zipcode, 
+      city, state1, country, 
+      country_iso_code, star_rating, longtitude, 
+      latitude, url1, check_in, 
+      check_out, number_rooms, number_floors, 
+      year_opened, year_renovaated, photo1, 
+      photo2, photo3, photo4, 
+      photo5, overview, rates_from, 
+      continent_id, continent_name, city_id, 
+      country_id, number_of_reviews, rating_average, 
+      rates_currency)
+    values (#{hotelId,jdbcType=INTEGER}, #{chainId,jdbcType=INTEGER}, #{chainName,jdbcType=VARCHAR}, 
+      #{brandId,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR}, #{hotelName,jdbcType=VARCHAR}, 
+      #{hotelFormerlyName,jdbcType=VARCHAR}, #{hotelTranslatedName,jdbcType=VARCHAR}, 
+      #{addressLine1,jdbcType=VARCHAR}, #{addressLine2,jdbcType=VARCHAR}, #{zipcode,jdbcType=INTEGER}, 
+      #{city,jdbcType=VARCHAR}, #{state1,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{countryIsoCode,jdbcType=VARCHAR}, #{starRating,jdbcType=INTEGER}, #{longtitude,jdbcType=DOUBLE}, 
+      #{latitude,jdbcType=DOUBLE}, #{url1,jdbcType=VARCHAR}, #{checkIn,jdbcType=VARCHAR}, 
+      #{checkOut,jdbcType=VARCHAR}, #{numberRooms,jdbcType=INTEGER}, #{numberFloors,jdbcType=INTEGER}, 
+      #{yearOpened,jdbcType=INTEGER}, #{yearRenovaated,jdbcType=INTEGER}, #{photo1,jdbcType=VARCHAR}, 
+      #{photo2,jdbcType=VARCHAR}, #{photo3,jdbcType=VARCHAR}, #{photo4,jdbcType=VARCHAR}, 
+      #{photo5,jdbcType=VARCHAR}, #{overview,jdbcType=VARCHAR}, #{ratesFrom,jdbcType=INTEGER}, 
+      #{continentId,jdbcType=INTEGER}, #{continentName,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, 
+      #{countryId,jdbcType=INTEGER}, #{numberOfReviews,jdbcType=INTEGER}, #{ratingAverage,jdbcType=INTEGER}, 
+      #{ratesCurrency,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.demo.springboot.helloworld.common.domain.Hotel">
+        insert into hotel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hotelId != null">
+                hotel_id,
+            </if>
+            <if test="chainId != null">
+                chain_id,
+            </if>
+            <if test="chainName != null">
+                chain_name,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="brandName != null">
+                brand_name,
+            </if>
+            <if test="hotelName != null">
+                hotel_name,
+            </if>
+            <if test="hotelFormerlyName != null">
+                hotel_formerly_name,
+            </if>
+            <if test="hotelTranslatedName != null">
+                hotel_translated_name,
+            </if>
+            <if test="addressLine1 != null">
+                address_line1,
+            </if>
+            <if test="addressLine2 != null">
+                address_line2,
+            </if>
+            <if test="zipcode != null">
+                zipcode,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="state1 != null">
+                state1,
+            </if>
+            <if test="country != null">
+                country,
+            </if>
+            <if test="countryIsoCode != null">
+                country_iso_code,
+            </if>
+            <if test="starRating != null">
+                star_rating,
+            </if>
+            <if test="longtitude != null">
+                longtitude,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="url1 != null">
+                url1,
+            </if>
+            <if test="checkIn != null">
+                check_in,
+            </if>
+            <if test="checkOut != null">
+                check_out,
+            </if>
+            <if test="numberRooms != null">
+                number_rooms,
+            </if>
+            <if test="numberFloors != null">
+                number_floors,
+            </if>
+            <if test="yearOpened != null">
+                year_opened,
+            </if>
+            <if test="yearRenovaated != null">
+                year_renovaated,
+            </if>
+            <if test="photo1 != null">
+                photo1,
+            </if>
+            <if test="photo2 != null">
+                photo2,
+            </if>
+            <if test="photo3 != null">
+                photo3,
+            </if>
+            <if test="photo4 != null">
+                photo4,
+            </if>
+            <if test="photo5 != null">
+                photo5,
+            </if>
+            <if test="overview != null">
+                overview,
+            </if>
+            <if test="ratesFrom != null">
+                rates_from,
+            </if>
+            <if test="continentId != null">
+                continent_id,
+            </if>
+            <if test="continentName != null">
+                continent_name,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="countryId != null">
+                country_id,
+            </if>
+            <if test="numberOfReviews != null">
+                number_of_reviews,
+            </if>
+            <if test="ratingAverage != null">
+                rating_average,
+            </if>
+            <if test="ratesCurrency != null">
+                rates_currency,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hotelId != null">
+                #{hotelId,jdbcType=INTEGER},
+            </if>
+            <if test="chainId != null">
+                #{chainId,jdbcType=INTEGER},
+            </if>
+            <if test="chainName != null">
+                #{chainName,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="brandName != null">
+                #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="hotelName != null">
+                #{hotelName,jdbcType=VARCHAR},
+            </if>
+            <if test="hotelFormerlyName != null">
+                #{hotelFormerlyName,jdbcType=VARCHAR},
+            </if>
+            <if test="hotelTranslatedName != null">
+                #{hotelTranslatedName,jdbcType=VARCHAR},
+            </if>
+            <if test="addressLine1 != null">
+                #{addressLine1,jdbcType=VARCHAR},
+            </if>
+            <if test="addressLine2 != null">
+                #{addressLine2,jdbcType=VARCHAR},
+            </if>
+            <if test="zipcode != null">
+                #{zipcode,jdbcType=INTEGER},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="state1 != null">
+                #{state1,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="countryIsoCode != null">
+                #{countryIsoCode,jdbcType=VARCHAR},
+            </if>
+            <if test="starRating != null">
+                #{starRating,jdbcType=INTEGER},
+            </if>
+            <if test="longtitude != null">
+                #{longtitude,jdbcType=DOUBLE},
+            </if>
+            <if test="latitude != null">
+                #{latitude,jdbcType=DOUBLE},
+            </if>
+            <if test="url1 != null">
+                #{url1,jdbcType=VARCHAR},
+            </if>
+            <if test="checkIn != null">
+                #{checkIn,jdbcType=VARCHAR},
+            </if>
+            <if test="checkOut != null">
+                #{checkOut,jdbcType=VARCHAR},
+            </if>
+            <if test="numberRooms != null">
+                #{numberRooms,jdbcType=INTEGER},
+            </if>
+            <if test="numberFloors != null">
+                #{numberFloors,jdbcType=INTEGER},
+            </if>
+            <if test="yearOpened != null">
+                #{yearOpened,jdbcType=INTEGER},
+            </if>
+            <if test="yearRenovaated != null">
+                #{yearRenovaated,jdbcType=INTEGER},
+            </if>
+            <if test="photo1 != null">
+                #{photo1,jdbcType=VARCHAR},
+            </if>
+            <if test="photo2 != null">
+                #{photo2,jdbcType=VARCHAR},
+            </if>
+            <if test="photo3 != null">
+                #{photo3,jdbcType=VARCHAR},
+            </if>
+            <if test="photo4 != null">
+                #{photo4,jdbcType=VARCHAR},
+            </if>
+            <if test="photo5 != null">
+                #{photo5,jdbcType=VARCHAR},
+            </if>
+            <if test="overview != null">
+                #{overview,jdbcType=VARCHAR},
+            </if>
+            <if test="ratesFrom != null">
+                #{ratesFrom,jdbcType=INTEGER},
+            </if>
+            <if test="continentId != null">
+                #{continentId,jdbcType=INTEGER},
+            </if>
+            <if test="continentName != null">
+                #{continentName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="countryId != null">
+                #{countryId,jdbcType=INTEGER},
+            </if>
+            <if test="numberOfReviews != null">
+                #{numberOfReviews,jdbcType=INTEGER},
+            </if>
+            <if test="ratingAverage != null">
+                #{ratingAverage,jdbcType=INTEGER},
+            </if>
+            <if test="ratesCurrency != null">
+                #{ratesCurrency,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.demo.springboot.helloworld.common.domain.HotelExample"
+            resultType="java.lang.Long">
+        select count(*) from hotel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update hotel
+        <set>
+            <if test="record.hotelId != null">
+                hotel_id = #{record.hotelId,jdbcType=INTEGER},
+            </if>
+            <if test="record.chainId != null">
+                chain_id = #{record.chainId,jdbcType=INTEGER},
+            </if>
+            <if test="record.chainName != null">
+                chain_name = #{record.chainName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.brandId != null">
+                brand_id = #{record.brandId,jdbcType=INTEGER},
+            </if>
+            <if test="record.brandName != null">
+                brand_name = #{record.brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hotelName != null">
+                hotel_name = #{record.hotelName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hotelFormerlyName != null">
+                hotel_formerly_name = #{record.hotelFormerlyName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hotelTranslatedName != null">
+                hotel_translated_name = #{record.hotelTranslatedName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.addressLine1 != null">
+                address_line1 = #{record.addressLine1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.addressLine2 != null">
+                address_line2 = #{record.addressLine2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zipcode != null">
+                zipcode = #{record.zipcode,jdbcType=INTEGER},
+            </if>
+            <if test="record.city != null">
+                city = #{record.city,jdbcType=VARCHAR},
+            </if>
+            <if test="record.state1 != null">
+                state1 = #{record.state1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.country != null">
+                country = #{record.country,jdbcType=VARCHAR},
+            </if>
+            <if test="record.countryIsoCode != null">
+                country_iso_code = #{record.countryIsoCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.starRating != null">
+                star_rating = #{record.starRating,jdbcType=INTEGER},
+            </if>
+            <if test="record.longtitude != null">
+                longtitude = #{record.longtitude,jdbcType=DOUBLE},
+            </if>
+            <if test="record.latitude != null">
+                latitude = #{record.latitude,jdbcType=DOUBLE},
+            </if>
+            <if test="record.url1 != null">
+                url1 = #{record.url1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.checkIn != null">
+                check_in = #{record.checkIn,jdbcType=VARCHAR},
+            </if>
+            <if test="record.checkOut != null">
+                check_out = #{record.checkOut,jdbcType=VARCHAR},
+            </if>
+            <if test="record.numberRooms != null">
+                number_rooms = #{record.numberRooms,jdbcType=INTEGER},
+            </if>
+            <if test="record.numberFloors != null">
+                number_floors = #{record.numberFloors,jdbcType=INTEGER},
+            </if>
+            <if test="record.yearOpened != null">
+                year_opened = #{record.yearOpened,jdbcType=INTEGER},
+            </if>
+            <if test="record.yearRenovaated != null">
+                year_renovaated = #{record.yearRenovaated,jdbcType=INTEGER},
+            </if>
+            <if test="record.photo1 != null">
+                photo1 = #{record.photo1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.photo2 != null">
+                photo2 = #{record.photo2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.photo3 != null">
+                photo3 = #{record.photo3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.photo4 != null">
+                photo4 = #{record.photo4,jdbcType=VARCHAR},
+            </if>
+            <if test="record.photo5 != null">
+                photo5 = #{record.photo5,jdbcType=VARCHAR},
+            </if>
+            <if test="record.overview != null">
+                overview = #{record.overview,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ratesFrom != null">
+                rates_from = #{record.ratesFrom,jdbcType=INTEGER},
+            </if>
+            <if test="record.continentId != null">
+                continent_id = #{record.continentId,jdbcType=INTEGER},
+            </if>
+            <if test="record.continentName != null">
+                continent_name = #{record.continentName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cityId != null">
+                city_id = #{record.cityId,jdbcType=INTEGER},
+            </if>
+            <if test="record.countryId != null">
+                country_id = #{record.countryId,jdbcType=INTEGER},
+            </if>
+            <if test="record.numberOfReviews != null">
+                number_of_reviews = #{record.numberOfReviews,jdbcType=INTEGER},
+            </if>
+            <if test="record.ratingAverage != null">
+                rating_average = #{record.ratingAverage,jdbcType=INTEGER},
+            </if>
+            <if test="record.ratesCurrency != null">
+                rates_currency = #{record.ratesCurrency,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update hotel
+        set hotel_id = #{record.hotelId,jdbcType=INTEGER},
+        chain_id = #{record.chainId,jdbcType=INTEGER},
+        chain_name = #{record.chainName,jdbcType=VARCHAR},
+        brand_id = #{record.brandId,jdbcType=INTEGER},
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+        hotel_name = #{record.hotelName,jdbcType=VARCHAR},
+        hotel_formerly_name = #{record.hotelFormerlyName,jdbcType=VARCHAR},
+        hotel_translated_name = #{record.hotelTranslatedName,jdbcType=VARCHAR},
+        address_line1 = #{record.addressLine1,jdbcType=VARCHAR},
+        address_line2 = #{record.addressLine2,jdbcType=VARCHAR},
+        zipcode = #{record.zipcode,jdbcType=INTEGER},
+        city = #{record.city,jdbcType=VARCHAR},
+        state1 = #{record.state1,jdbcType=VARCHAR},
+        country = #{record.country,jdbcType=VARCHAR},
+        country_iso_code = #{record.countryIsoCode,jdbcType=VARCHAR},
+        star_rating = #{record.starRating,jdbcType=INTEGER},
+        longtitude = #{record.longtitude,jdbcType=DOUBLE},
+        latitude = #{record.latitude,jdbcType=DOUBLE},
+        url1 = #{record.url1,jdbcType=VARCHAR},
+        check_in = #{record.checkIn,jdbcType=VARCHAR},
+        check_out = #{record.checkOut,jdbcType=VARCHAR},
+        number_rooms = #{record.numberRooms,jdbcType=INTEGER},
+        number_floors = #{record.numberFloors,jdbcType=INTEGER},
+        year_opened = #{record.yearOpened,jdbcType=INTEGER},
+        year_renovaated = #{record.yearRenovaated,jdbcType=INTEGER},
+        photo1 = #{record.photo1,jdbcType=VARCHAR},
+        photo2 = #{record.photo2,jdbcType=VARCHAR},
+        photo3 = #{record.photo3,jdbcType=VARCHAR},
+        photo4 = #{record.photo4,jdbcType=VARCHAR},
+        photo5 = #{record.photo5,jdbcType=VARCHAR},
+        overview = #{record.overview,jdbcType=VARCHAR},
+        rates_from = #{record.ratesFrom,jdbcType=INTEGER},
+        continent_id = #{record.continentId,jdbcType=INTEGER},
+        continent_name = #{record.continentName,jdbcType=VARCHAR},
+        city_id = #{record.cityId,jdbcType=INTEGER},
+        country_id = #{record.countryId,jdbcType=INTEGER},
+        number_of_reviews = #{record.numberOfReviews,jdbcType=INTEGER},
+        rating_average = #{record.ratingAverage,jdbcType=INTEGER},
+        rates_currency = #{record.ratesCurrency,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.demo.springboot.helloworld.common.domain.Hotel">
+        update hotel
+        <set>
+            <if test="chainId != null">
+                chain_id = #{chainId,jdbcType=INTEGER},
+            </if>
+            <if test="chainName != null">
+                chain_name = #{chainName,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="brandName != null">
+                brand_name = #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="hotelName != null">
+                hotel_name = #{hotelName,jdbcType=VARCHAR},
+            </if>
+            <if test="hotelFormerlyName != null">
+                hotel_formerly_name = #{hotelFormerlyName,jdbcType=VARCHAR},
+            </if>
+            <if test="hotelTranslatedName != null">
+                hotel_translated_name = #{hotelTranslatedName,jdbcType=VARCHAR},
+            </if>
+            <if test="addressLine1 != null">
+                address_line1 = #{addressLine1,jdbcType=VARCHAR},
+            </if>
+            <if test="addressLine2 != null">
+                address_line2 = #{addressLine2,jdbcType=VARCHAR},
+            </if>
+            <if test="zipcode != null">
+                zipcode = #{zipcode,jdbcType=INTEGER},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="state1 != null">
+                state1 = #{state1,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="countryIsoCode != null">
+                country_iso_code = #{countryIsoCode,jdbcType=VARCHAR},
+            </if>
+            <if test="starRating != null">
+                star_rating = #{starRating,jdbcType=INTEGER},
+            </if>
+            <if test="longtitude != null">
+                longtitude = #{longtitude,jdbcType=DOUBLE},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude,jdbcType=DOUBLE},
+            </if>
+            <if test="url1 != null">
+                url1 = #{url1,jdbcType=VARCHAR},
+            </if>
+            <if test="checkIn != null">
+                check_in = #{checkIn,jdbcType=VARCHAR},
+            </if>
+            <if test="checkOut != null">
+                check_out = #{checkOut,jdbcType=VARCHAR},
+            </if>
+            <if test="numberRooms != null">
+                number_rooms = #{numberRooms,jdbcType=INTEGER},
+            </if>
+            <if test="numberFloors != null">
+                number_floors = #{numberFloors,jdbcType=INTEGER},
+            </if>
+            <if test="yearOpened != null">
+                year_opened = #{yearOpened,jdbcType=INTEGER},
+            </if>
+            <if test="yearRenovaated != null">
+                year_renovaated = #{yearRenovaated,jdbcType=INTEGER},
+            </if>
+            <if test="photo1 != null">
+                photo1 = #{photo1,jdbcType=VARCHAR},
+            </if>
+            <if test="photo2 != null">
+                photo2 = #{photo2,jdbcType=VARCHAR},
+            </if>
+            <if test="photo3 != null">
+                photo3 = #{photo3,jdbcType=VARCHAR},
+            </if>
+            <if test="photo4 != null">
+                photo4 = #{photo4,jdbcType=VARCHAR},
+            </if>
+            <if test="photo5 != null">
+                photo5 = #{photo5,jdbcType=VARCHAR},
+            </if>
+            <if test="overview != null">
+                overview = #{overview,jdbcType=VARCHAR},
+            </if>
+            <if test="ratesFrom != null">
+                rates_from = #{ratesFrom,jdbcType=INTEGER},
+            </if>
+            <if test="continentId != null">
+                continent_id = #{continentId,jdbcType=INTEGER},
+            </if>
+            <if test="continentName != null">
+                continent_name = #{continentName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="countryId != null">
+                country_id = #{countryId,jdbcType=INTEGER},
+            </if>
+            <if test="numberOfReviews != null">
+                number_of_reviews = #{numberOfReviews,jdbcType=INTEGER},
+            </if>
+            <if test="ratingAverage != null">
+                rating_average = #{ratingAverage,jdbcType=INTEGER},
+            </if>
+            <if test="ratesCurrency != null">
+                rates_currency = #{ratesCurrency,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where hotel_id = #{hotelId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.demo.springboot.helloworld.common.domain.Hotel">
+    update hotel
+    set chain_id = #{chainId,jdbcType=INTEGER},
+      chain_name = #{chainName,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      hotel_name = #{hotelName,jdbcType=VARCHAR},
+      hotel_formerly_name = #{hotelFormerlyName,jdbcType=VARCHAR},
+      hotel_translated_name = #{hotelTranslatedName,jdbcType=VARCHAR},
+      address_line1 = #{addressLine1,jdbcType=VARCHAR},
+      address_line2 = #{addressLine2,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      state1 = #{state1,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      country_iso_code = #{countryIsoCode,jdbcType=VARCHAR},
+      star_rating = #{starRating,jdbcType=INTEGER},
+      longtitude = #{longtitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      url1 = #{url1,jdbcType=VARCHAR},
+      check_in = #{checkIn,jdbcType=VARCHAR},
+      check_out = #{checkOut,jdbcType=VARCHAR},
+      number_rooms = #{numberRooms,jdbcType=INTEGER},
+      number_floors = #{numberFloors,jdbcType=INTEGER},
+      year_opened = #{yearOpened,jdbcType=INTEGER},
+      year_renovaated = #{yearRenovaated,jdbcType=INTEGER},
+      photo1 = #{photo1,jdbcType=VARCHAR},
+      photo2 = #{photo2,jdbcType=VARCHAR},
+      photo3 = #{photo3,jdbcType=VARCHAR},
+      photo4 = #{photo4,jdbcType=VARCHAR},
+      photo5 = #{photo5,jdbcType=VARCHAR},
+      overview = #{overview,jdbcType=VARCHAR},
+      rates_from = #{ratesFrom,jdbcType=INTEGER},
+      continent_id = #{continentId,jdbcType=INTEGER},
+      continent_name = #{continentName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=INTEGER},
+      country_id = #{countryId,jdbcType=INTEGER},
+      number_of_reviews = #{numberOfReviews,jdbcType=INTEGER},
+      rating_average = #{ratingAverage,jdbcType=INTEGER},
+      rates_currency = #{ratesCurrency,jdbcType=VARCHAR}
+    where hotel_id = #{hotelId,jdbcType=INTEGER}
+  </update>
+</mapper>

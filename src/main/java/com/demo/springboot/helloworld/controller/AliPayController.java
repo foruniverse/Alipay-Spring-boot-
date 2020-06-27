@@ -7,30 +7,33 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
-
+import com.demo.springboot.helloworld.common.domain.Order;
+import com.demo.springboot.helloworld.common.domain.OrderDetail;
 import com.demo.springboot.helloworld.common.domain.Room;
-import com.demo.springboot.helloworld.common.domain.Trade;
+import com.demo.springboot.helloworld.config.AlipayConfig;
+import com.demo.springboot.helloworld.service.AccessBackService;
 import com.demo.springboot.helloworld.service.MailService;
 import com.demo.springboot.helloworld.service.RoomService;
-import com.demo.springboot.helloworld.service.TradeService;
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.demo.springboot.helloworld.config.AlipayConfig;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.lang.String;
+
+/* *
+ *类名：AlipayController
+ *功能：基础功能类
+ *详细：后台接口
+ * 编写者:何成阳
+ *说明：
+ */
 
 @RequestMapping("/aliPay")
 @Controller
@@ -39,24 +42,16 @@ public class AliPayController {
     private MailService mailService;
 
     @Autowired
-    private TradeService tradeService;
-
-    @Autowired
     private RoomService roomService;
 
+    @Autowired
+    private AccessBackService accessBackService;
 
-    /*
-        支付接口
-        @params hotel_id
-        @params room_id
-        @params total_amount
-        @params user_id
 
-        传参方式使用httpservletRequest request
-     */
-    @RequestMapping("/goPay")
+    @RequestMapping(value = "/goPay")
     public @ResponseBody
-    String pay( HttpServletRequest request) throws UnsupportedEncodingException {
+//    String pay(@RequestBody Map<String,Object> map) throws UnsupportedEncodingException {
+    String pay(HttpServletRequest request) throws UnsupportedEncodingException {
         //在声明里抛出异常为了加强代码可阅读性
         System.out.println("Ok");
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
@@ -65,52 +60,113 @@ public class AliPayController {
         alipayRequest.setReturnUrl(AlipayConfig.return_url);// 支付成功后的返回连接,请自行指定
         alipayRequest.setNotifyUrl(AlipayConfig.notify_url);// 异步通知连接,逻辑已写好,但表结构不同,请务必使用我的表
 
+        //获得参数
+//        String user=null;
+//        if(map.containsKey("user"))
+//        {
+//            user =map.get("user").toString();
+//            System.out.println(user);
+//        }
+//
+//        if(map.containsKey("hotelID"))
+//        {
+//            int hotelId = Integer.parseInt(map.get("user").toString());
+//            System.out.println(hotelId);
+//        }
+//        String hotelname=null;
+//        if(map.containsKey("hotel"))
+//        {
+//            hotelname =map.get("hotel").toString();
+//            System.out.println(hotelname);
+//        }
+//        int hotelId =-1;
+//        if(map.containsKey("hotel"))
+//        {
+//            hotelId = Integer.parseInt(map.get("hotel").toString());
+//            System.out.println(hotelId);
+//        }
+//        int roomId=0;
+//        if(map.containsKey("room"))
+//        {
+//            roomId = Integer.parseInt(map.get("room").toString());
+//            System.out.println(roomId);
+//        }
+//        String comment=null;
+//        if(map.containsKey("comment"))
+//        {
+//            comment = map.get("room").toString();
+//            System.out.println(comment);
+//        }
+//--------------------------接收json数据使用上面的-----------------
+        String user = null;
+        user = new String(request.getParameter("user"));
+        System.out.println(user);
 
-        String body = null;
-        body = new String(request.getParameter("trade_comment").getBytes("ISO-8859-1"),"UTF-8");
-        System.out.println(body);
-        //订单标题=系统订单号+酒店ID+房间Id+金额
-        Timestamp ts= new Timestamp(new Date().getTime());
-        String temp=new String(request.getParameter("room_id").getBytes("ISO-8859-1"),"UTF-8");
-        System.out.println(temp);
-        int roomId=Integer.valueOf(temp);
-        temp=new String(request.getParameter("hotel_id").getBytes("ISO-8859-1"),"UTF-8");
-        System.out.println(temp);
-        int hotelId=Integer.valueOf(temp);
-            System.out.println(roomId);
-        // 获取房间id
-        String total_amount=new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
-            System.out.println(total_amount);
+        String hotelname = null;
+        hotelname = request.getParameter("hotel").toString();
+        System.out.println(hotelname);
 
-        String subject = "酒店ID"+hotelId+"房间ID"+roomId+"用户ID"+1;
+        int hotelId;
+        hotelId = Integer.parseInt(request.getParameter("hotelId").toString());
+        System.out.println(hotelId);
 
-        // 注入数据库 此时订单状态为(0)
+        int roomId = Integer.parseInt(request.getParameter("room").toString());
+        System.out.println(roomId);
 
-        if(!roomService.isRoomEmpty(roomId))
+        String comment = null;
+        comment = request.getParameter("comment").toString();
+        System.out.println(comment);
+
+        String price_string = null;
+        price_string = request.getParameter("price").toString();
+        System.out.println(price_string);
+
+
+//        String price_string = map.get("price").toString();
+        if (price_string.equals(null))
+            return "订单数据异常";
+        double price_double = Double.parseDouble(price_string);
+
+//        String man=map.containsKey("man")==true?"man":null;
+//        String child=map.containsKey("child")==true?"child":null;
+//        String baby=map.containsKey("baby")==true?"baby":null;
+        //顶单标题
+
+        String subject = "订单人群" + "man" + "+" + "child" + "+" + "baby";
+        // 注入数据库 此时订单状态为(wait_buyer_pay)
+        if (!roomService.isRoomEmpty(roomId))
             return "亲,宁来晚了哟,房间已被预订,再选一个吧";
-
-        Trade trade = new Trade();
-        trade.setTradeAmount(BigDecimal.valueOf(Double.valueOf(total_amount)));
-        trade.setTradeComment(body);
-        trade.setHotelId(hotelId);
-        trade.setRoomId(roomId);
-        trade.setTradeCreateTime(ts);
-        trade.setTradeState(0);
-        trade.setTradeUserId(1);// 获取当前登录用户ID
-        trade.setTradeTitle(subject);
-        //更改房间状态,只要进入了此步逻辑,无论是否付款成功都将订单改为已预订
-        Room room=new Room();
+        Room room = new Room();
         room.setRoomId(roomId);
         room.setRoomState(1);
-        roomService.updateRoomSelective(room); // 更新房间状态
-        tradeService.insertInitial(trade);
+        roomService.updateRoomSelective(room);
+        //更新房间状态
+        Order order = new Order();
+        order.setStatus("WAIT_BUYER_PAY");
+        order.setEmail(user);
+        order.setHotel(hotelname);
+        order.setHotel_id(hotelId);
+        order.setMobile("1234567890");
+        order.setRoom_id(roomId);
+        order.setUid(1);
+        order.setTotleprice(price_double);
         //插入订单
-        String out_trade_no=Integer.toString(trade.getOutTradeNo());
-        System.out.println("订单号"+out_trade_no);
-        alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
-                + "\"total_amount\":\""+ total_amount +"\","
-                + "\"subject\":\""+ subject +"\","
-                + "\"body\":\""+ body +"\","
+        accessBackService.insertOrderInfo(order);
+        String out_trade_no = Integer.toString(order.getId());
+        System.out.println("订单号" + out_trade_no);
+
+        OrderDetail orderDetail = new OrderDetail();
+        orderDetail.setId(order.getId());
+        orderDetail.setRoom(roomId);
+        orderDetail.setRemark(comment);
+        orderDetail.setPrice(price_double);
+        orderDetail.setRoomtype("大床房");
+        accessBackService.insertOrderDetail(orderDetail);
+
+        alipayRequest.setBizContent("{\"out_trade_no\":\"" + out_trade_no + "\","
+                + "\"total_amount\":\"" + price_string + "\","
+                + "\"subject\":\"" + subject + "\","
+                + "\"body\":\"" + comment + "\","
                 + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
 
         //若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明
@@ -143,11 +199,11 @@ public class AliPayController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/return")
-    public String return_message(HttpServletRequest request, HttpServletResponse response , Model model) throws UnsupportedEncodingException {
+    public String return_message(HttpServletRequest request) throws UnsupportedEncodingException {
         System.out.println("return");
-        Map<String,String> params = new HashMap<String,String>();
-        Map<java.lang.String, java.lang.String[]> requestParams = request.getParameterMap();
-        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String[]> requestParams = request.getParameterMap();
+        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
             String name = (String) iter.next();
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
@@ -170,25 +226,25 @@ public class AliPayController {
         //——请在这里编写您的程序（以下代码仅作参考）——
         if(signVerified) {
             //商户订单号
-            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
             //支付宝交易号
-            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
             //付款金额
-            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
+            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
 
 
-            model.addAttribute("out_trade_no",out_trade_no);
-            model.addAttribute("trade_no",trade_no);
-            model.addAttribute("total_amount",total_amount);
-            System.out.println("trade_no:"+trade_no+"<br/>out_trade_no:"+out_trade_no+"<br/>total_amount:"+total_amount);
+//            model.addAttribute("out_trade_no",out_trade_no);
+//            model.addAttribute("trade_no",trade_no);
+//            model.addAttribute("total_amount",total_amount);
+            System.out.println("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
 
         }else {
             System.out.println("验签失败");
         }
         System.out.println( "test");
-        return "/test";
+        return "/admin/index.html";
     }
 
     //这一块是异步通知,用来验证支付信息是否正确,请不要修改
@@ -229,7 +285,7 @@ public class AliPayController {
 	这里的异常处理没有想明白怎么做,所以就没做
 	反正支付宝大部分情况应该不会打脸,流在后面在想一想
 	*/
-        Trade trade = new Trade();
+        Order order = new Order();
 
         if(signVerified) {//验证成功
             //商户订单号
@@ -241,33 +297,34 @@ public class AliPayController {
             String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
 
             //交易状态
-            String trade_status = null;
 
-            trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
+            String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");
 
             String title = new String (request.getParameter("subject").getBytes("ISO-8859-1"),"UTF-8");
-            if(trade_status.equals("TRADE_FINISHED")){
+            if (trade_status.equals("TRADE_FINISHED")) {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
-
                 //注意：
                 //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 
                 System.out.println("trade_finished");
-            }else if (trade_status.equals("TRADE_SUCCESS")){
+            } else if (trade_status.equals("TRADE_SUCCESS")) {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
-
                 //注意：
                 //付款完成后，支付宝系统发送该交易状态通知
                 System.out.println("trade_success");
-                trade.setTradeState(1);
-                trade.setOutTradeNo(Integer.valueOf(out_trade_no));
-                trade.setTradeNo(trade_no);
-                tradeService.updateTradeState(trade);
-                mailService.sendSimpleMail("hcy1256349091@gmail.com","订单已支付","订单号"+out_trade_no+"\n欢迎再次光临");
+                // 设置订单info
+                order.setId(Integer.parseInt(out_trade_no));
+                order.setOrderno(trade_no);
+                order.setStatus("TRADE_SUCCESS");
+                accessBackService.updateOrderState(order);
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.setId(Integer.parseInt((out_trade_no)));
+                orderDetail.setOrderno(trade_no);
+                mailService.sendSimpleMail("hcy1256349091@gmail.com", "订单已支付", "订单号" + out_trade_no + "\n欢迎再次光临");
             }
 
             System.out.println("success");

@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.springboot.helloworld.mapper.RoomMapper">
   <resultMap id="BaseResultMap" type="com.demo.springboot.helloworld.common.domain.Room">
-    <id column="room_id" jdbcType="INTEGER" property="roomId" />
-    <result column="hotel_id" jdbcType="INTEGER" property="hotelId" />
-    <result column="room_state" jdbcType="INTEGER" property="roomState" />
-    <result column="room_price" jdbcType="INTEGER" property="roomPrice" />
+    <id column="room_id" jdbcType="INTEGER" property="roomId"/>
+    <result column="hotel_id" jdbcType="INTEGER" property="hotelId"/>
+    <result column="room_state" jdbcType="INTEGER" property="roomState"/>
+    <result column="roomtype" jdbcType="VARCHAR" property="roomtype"/>
+    <result column="room_price" jdbcType="DOUBLE" property="roomPrice"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    room_id, hotel_id, room_state, room_price
+    room_id, hotel_id, room_state, roomtype, room_price
   </sql>
   <select id="selectByExample" parameterType="com.demo.springboot.helloworld.common.domain.RoomExample" resultMap="BaseResultMap">
     select
@@ -74,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hotel_room
+    from room
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,27 +86,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from hotel_room
+    from room
     where room_id = #{roomId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from hotel_room
+    delete from room
     where room_id = #{roomId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.demo.springboot.helloworld.common.domain.RoomExample">
-    delete from hotel_room
+    delete from room
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.demo.springboot.helloworld.common.domain.Room">
-    insert into hotel_room (room_id, hotel_id, room_state, 
-      room_price)
+    insert into room (room_id, hotel_id, room_state, 
+      roomtype, room_price)
     values (#{roomId,jdbcType=INTEGER}, #{hotelId,jdbcType=INTEGER}, #{roomState,jdbcType=INTEGER}, 
-      #{roomPrice,jdbcType=INTEGER})
+      #{roomtype,jdbcType=VARCHAR}, #{roomPrice,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.demo.springboot.helloworld.common.domain.Room">
-    insert into hotel_room
+    insert into room
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roomId != null">
         room_id,
@@ -115,6 +116,9 @@
       </if>
       <if test="roomState != null">
         room_state,
+      </if>
+      <if test="roomtype != null">
+        roomtype,
       </if>
       <if test="roomPrice != null">
         room_price,
@@ -130,19 +134,22 @@
       <if test="roomState != null">
         #{roomState,jdbcType=INTEGER},
       </if>
+      <if test="roomtype != null">
+        #{roomtype,jdbcType=VARCHAR},
+      </if>
       <if test="roomPrice != null">
-        #{roomPrice,jdbcType=INTEGER},
+        #{roomPrice,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.demo.springboot.helloworld.common.domain.RoomExample" resultType="java.lang.Long">
-    select count(*) from hotel_room
+    select count(*) from room
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hotel_room
+    update room
     <set>
       <if test="record.roomId != null">
         room_id = #{record.roomId,jdbcType=INTEGER},
@@ -153,8 +160,11 @@
       <if test="record.roomState != null">
         room_state = #{record.roomState,jdbcType=INTEGER},
       </if>
+      <if test="record.roomtype != null">
+        roomtype = #{record.roomtype,jdbcType=VARCHAR},
+      </if>
       <if test="record.roomPrice != null">
-        room_price = #{record.roomPrice,jdbcType=INTEGER},
+        room_price = #{record.roomPrice,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -162,17 +172,18 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hotel_room
+    update room
     set room_id = #{record.roomId,jdbcType=INTEGER},
-      hotel_id = #{record.hotelId,jdbcType=INTEGER},
-      room_state = #{record.roomState,jdbcType=INTEGER},
-      room_price = #{record.roomPrice,jdbcType=INTEGER}
+    hotel_id = #{record.hotelId,jdbcType=INTEGER},
+    room_state = #{record.roomState,jdbcType=INTEGER},
+    roomtype = #{record.roomtype,jdbcType=VARCHAR},
+    room_price = #{record.roomPrice,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.demo.springboot.helloworld.common.domain.Room">
-    update hotel_room
+    update room
     <set>
       <if test="hotelId != null">
         hotel_id = #{hotelId,jdbcType=INTEGER},
@@ -180,17 +191,21 @@
       <if test="roomState != null">
         room_state = #{roomState,jdbcType=INTEGER},
       </if>
+      <if test="roomtype != null">
+        roomtype = #{roomtype,jdbcType=VARCHAR},
+      </if>
       <if test="roomPrice != null">
-        room_price = #{roomPrice,jdbcType=INTEGER},
+        room_price = #{roomPrice,jdbcType=DOUBLE},
       </if>
     </set>
     where room_id = #{roomId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.demo.springboot.helloworld.common.domain.Room">
-    update hotel_room
+    update room
     set hotel_id = #{hotelId,jdbcType=INTEGER},
       room_state = #{roomState,jdbcType=INTEGER},
-      room_price = #{roomPrice,jdbcType=INTEGER}
+      roomtype = #{roomtype,jdbcType=VARCHAR},
+      room_price = #{roomPrice,jdbcType=DOUBLE}
     where room_id = #{roomId,jdbcType=INTEGER}
   </update>
 </mapper>

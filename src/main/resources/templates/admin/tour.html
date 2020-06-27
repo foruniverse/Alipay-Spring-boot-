@@ -1,0 +1,662 @@
+﻿<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Basic page needs
+	============================================ -->
+	<title>Hotel-search</title>
+	<meta charset="utf-8">
+	<meta name="keywords" content="html5 template, best html5 template, best html template, html5 basic template, multipurpose html5 template, multipurpose html template, creative html templates, creative html5 templates" />
+	<meta name="description" content="PortKey is a beautiful and creative travel booking HTML template for any travel designs" />
+	<meta name="author" content="Magentech">
+	<meta name="robots" content="index, follow" />
+<!-- Mobile specific metas
+	============================================ -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- Favicon
+	============================================ -->
+
+<!-- Libs CSS
+	============================================ -->
+	<link rel="stylesheet" th:href="@{/plugins/css/bootstrap/css/bootstrap.min.css}">
+	<link th:href="@{/plugins/css/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+	<link th:href="@{/plugins/js/datetimepicker/bootstrap-datetimepicker.min.css}" rel="stylesheet">
+	<link th:href="@{/plugins/js/owl-carousel/owl.carousel.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/lib.css}" rel="stylesheet">
+	<link th:href="@{/plugins/js/jquery-ui/jquery-ui.min.css}" rel="stylesheet">
+	<link th:href="@{/plugins/js/minicolors/miniColors.css}" rel="stylesheet">
+<!-- Theme CSS
+	=========================================== -->
+	<link th:href="@{/plugins/css/themecss/so_sociallogin.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so_searchpro.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so_megamenu.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so-categories.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so-listing-tabs.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so-category-slider.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/themecss/so-newletter-popup.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/footer/footer1.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/header/header1.css}" rel="stylesheet">
+	<link id="color_scheme" th:href="@{./plugins/css/theme.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/responsive.css}" rel="stylesheet">
+	<link th:href="@{/plugins/css/quickview/quickview.css}" rel="stylesheet">
+<!-- Google web fonts
+	============================================ -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,500,600,700,800&display=swap" rel="stylesheet">
+
+
+	<script>
+
+		window.operateEvents  = {
+			'click .btn_update': function (e, value, row, index) {
+				var hid = row.hotelId;
+				$.cookie('hotelid',hid);
+				window.location.href="/hotel-detail";
+			},
+		};
+
+		function showAll() {
+			{
+				$('#table1').bootstrapTable('destroy').bootstrapTable({
+					method: 'get',
+					url: "/showAll",
+					striped: true,
+					dataField: "list",
+					totalField: "total",
+					pageNumber: 1,
+					pageSize: 25,
+					pagination: true,
+					queryParamsType: 'limit',
+					// search: true,
+					queryParams: function (params) {
+						return {
+							pageSize: params.limit,
+							pageNo: params.offset / params.limit + 1
+						}
+					},
+					sidePagination: 'server',
+					pageList: "[10, 25, 50, 100, all]",
+					showRefresh: true,
+					clickToSelect: true,
+					toolbarAlign: 'left',
+					buttonsAlign: 'right',
+					toolbar: '#toolbar',
+					showColumns: false,
+					paginationLoop: false,
+					columns: [
+						{
+							title: 'ID',
+							field: 'hotelId',
+							visible: false,
+							width: 160
+						},
+						{
+							title: 'Hotel Name',
+							field: 'hotelName',
+							visible: true,
+							width: 300
+						},
+						{
+							title: 'Address',
+							field: 'addressLine1',
+							width: 300,
+							align: 'center'
+						},
+						{
+							title: 'Star',
+							field: 'starRating',
+							width: 60,
+							align: 'left'
+						},
+						{
+							title: 'Option',
+							width: 80,
+							align: 'center',
+							formatter:function (value, row, index) {
+								return [
+									' <button  type="button" class="btn btn-primary btn-xs btn_update">',
+									'Detail' ,
+									'</button>',
+								].join('')
+							},
+							events:window.operateEvents
+						}
+					],
+					locale: 'zh-CN',
+					responseHandler: function (data) {
+						return data['data'];
+					}
+				});
+			}
+		}
+
+		window.onload = showAll;
+
+
+		function selectByStar(starsval) {
+			{
+
+				$('#table1').bootstrapTable('destroy').bootstrapTable({
+					method: 'get',
+					url: "/searchByStar?starRating="+starsval,
+					striped: true,
+					dataField: "list",
+					totalField: "total",
+					pageNumber: 1,
+					pageSize: 25,
+					pagination: true,
+					queryParamsType: 'limit',
+					// search: true,
+					queryParams: function (params) {
+						return {
+							pageSize: params.limit,
+							pageNo: params.offset / params.limit + 1
+						}
+					},
+					sidePagination: 'server',
+					pageList: "[10, 25, 50, 100, all]",
+					showRefresh: true,
+					clickToSelect: true,
+					toolbarAlign: 'left',
+					buttonsAlign: 'right',
+					toolbar: '#toolbar',
+					showColumns: false,
+					paginationLoop: false,
+					columns: [
+						{
+							title: 'ID',
+							field: 'hotelId',
+							visible: false,
+							width: 160
+						},
+						{
+							title: 'Hotel Name',
+							field: 'hotelName',
+							visible: true,
+							width: 300
+						},
+						{
+							title: 'Address',
+							field: 'addressLine1',
+							width: 300,
+							align: 'center'
+						},
+						{
+							title: 'Star',
+							field: 'starRating',
+							width: 60,
+							align: 'left'
+						},
+						{
+							title: 'Option',
+							width: 80,
+							align: 'center',
+							formatter:function (value, row, index) {
+								return [
+									' <button  type="button" class="btn btn-primary btn-xs btn_update">',
+									'Detail' ,
+									'</button>',
+								].join('')
+							},
+							events:window.operateEvents
+						}
+					],
+					locale: 'zh-CN',
+					responseHandler: function (data) {
+						return data['data'];
+					}
+				});
+			}
+		}
+
+		function selectByMul() {
+			{
+				var cityval = jQuery("#city").val();
+				$('#table1').bootstrapTable('destroy').bootstrapTable({
+					method: 'get',
+					url: "/searchByMul?city="+cityval,
+					striped: true,
+					dataField: "list",
+					totalField: "total",
+					pageNumber: 1,
+					pageSize: 25,
+					pagination: true,
+					queryParamsType: 'limit',
+					// search: true,
+					queryParams: function (params) {
+						return {
+							pageSize: params.limit,
+							pageNo: params.offset / params.limit + 1
+						}
+					},
+					sidePagination: 'server',
+					pageList: "[10, 25, 50, 100, all]",
+					showRefresh: true,
+					clickToSelect: true,
+					toolbarAlign: 'left',
+					buttonsAlign: 'right',
+					toolbar: '#toolbar',
+					showColumns: false,
+					paginationLoop: false,
+					columns: [
+						{
+							title: 'ID',
+							field: 'hotelId',
+							visible: false,
+							width: 160
+						},
+						{
+							title: 'Hotel Name',
+							field: 'hotelName',
+							visible: true,
+							width: 300
+						},
+						{
+							title: 'Address',
+							field: 'addressLine1',
+							width: 300,
+							align: 'center'
+						},
+						{
+							title: 'Star',
+							field: 'starRating',
+							width: 60,
+							align: 'left'
+						},
+						{
+							title: 'Option',
+							width: 80,
+							align: 'center',
+							formatter:function (value, row, index) {
+								return [
+									' <button  type="button" class="btn btn-primary btn-xs btn_update">',
+									'Detail' ,
+									'</button>',
+								].join('')
+							},
+							events:window.operateEvents
+						}
+					],
+					locale: 'zh-CN',
+					responseHandler: function (data) {
+						return data['data'];
+					}
+				});
+			}
+		}
+
+		function selectByName() {
+			{
+				var nameval = jQuery("#name").val();
+				$('#table1').bootstrapTable('destroy').bootstrapTable({
+					method: 'get',
+					url: "/searchByName?hotelName="+nameval,
+					striped: true,
+					dataField: "list",
+					totalField: "total",
+					pageNumber: 1,
+					pageSize: 25,
+					pagination: true,
+					queryParamsType: 'limit',
+					// search: true,
+					queryParams: function (params) {
+						return {
+							pageSize: params.limit,
+							pageNo: params.offset / params.limit + 1
+						}
+					},
+					sidePagination: 'server',
+					pageList: "[10, 25, 50, 100, all]",
+					showRefresh: true,
+					clickToSelect: true,
+					toolbarAlign: 'left',
+					buttonsAlign: 'right',
+					toolbar: '#toolbar',
+					showColumns: false,
+					paginationLoop: false,
+					columns: [
+						{
+							title: 'ID',
+							field: 'hotelId',
+							visible: false,
+							width: 160
+						},
+						{
+							title: 'Hotel Name',
+							field: 'hotelName',
+							visible: true,
+							width: 300
+						},
+						{
+							title: 'Address',
+							field: 'addressLine1',
+							width: 300,
+							align: 'center'
+						},
+						{
+							title: 'Star',
+							field: 'starRating',
+							width: 60,
+							align: 'left'
+						},
+						{
+							title: 'Option',
+							width: 80,
+							align: 'center',
+							formatter:function (value, row, index) {
+								return [
+									' <button  type="button" class="btn btn-primary btn-xs btn_update">',
+									'Detail' ,
+									'</button>',
+								].join('')
+							},
+							events:window.operateEvents
+						}
+					],
+					locale: 'zh-CN',
+					responseHandler: function (data) {
+						return data['data'];
+					}
+				});
+			}
+		}
+
+	</script>
+
+	<style type="text/css">
+	body{font-family: 'Libre Franklin', sans-serif;}
+</style>
+</head>
+
+<body class=" res layout-1">
+
+	<div id="wrapper" class="wrapper-fluid banners-effect-10">    
+
+		<!-- Header Container  -->
+		<header id="header" class=" typeheader-1">
+			<!-- Header Top -->
+			<div class="header-bonus">
+				<div class="container">
+					<ul class="bonus-phone pull-left">
+						<li><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:00000000">+86 00 00 00 00</a></li>
+						<li><i class="fa fa-map-marker" aria-hidden="true"></i> 2 Chuanda Road, Chengdu</li>
+					</ul>
+					<ul class="bonus-social pull-left">
+						<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					</ul>	
+				</div>
+			</div>
+			<div class="header-top hidden-compact">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-xs-6 header-logo pull-left">
+							<div class="navbar-logo">
+								<a href="/"><img th:src="@{/plugins/image/catalog/demo/logo/logo.png}" alt="Your Store" width="118" height="36" title="Your Store"></a>
+							</div>
+						</div>
+						<!-- Menuhome -->
+						<div class="header-menu pull-right">
+							<div class="megamenu-style-dev megamenu-dev">
+								<div class="responsive">
+									<nav class="navbar-default">
+										<div class="container-megamenu horizontal">
+											<div class="navbar-header">
+												<button type="button" id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+													<span class="icon-bar"></span>
+													<span class="icon-bar"></span>
+													<span class="icon-bar"></span>
+												</button>
+											</div>
+											<div class="megamenu-wrapper">
+												<span id="remove-megamenu" class="fa fa-times"></span>
+												<div class="megamenu-pattern">
+													<div class="container">
+														<ul class="megamenu" data-transition="slide" data-animationtime="500">
+															<li class="menu-home with-sub-menu hover">
+																<p class="close-menu"></p>
+																<a href="/" class="clearfix">
+																	<strong>
+																		Home
+																	</strong>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- //Header Top -->
+		</header>
+		<!-- //Header Container  -->
+		
+
+		<!-- Main Container  -->
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="title-breadcrumb">   
+					Hotel
+				</div>
+				<ul class="breadcrumb-cate">
+					<li><a href="/">Home</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="container product-detail">
+			<div class="row">
+				<aside class="col-md-3 col-sm-4 col-xs-12 content-aside left_column sidebar-offcanvas">
+					<span id="close-sidebar" class="fa fa-times"></span>
+					<div class="module-search clearfix">
+						<h3 class="modtitle">Hotel searching</h3>
+						<div class="search-pr">
+							<div class="search-item city">
+								<input type="text" class="tour-search-input" id="city" name="city" placeholder="Your Destination">
+							</div>
+							<div class="search-item date">
+								<input type="text" class="tour-search-input datepicker hasDatepicker" id="date_from" placeholder="Day start">
+							</div>
+							<div class="search-item date">
+								<input type="text" class="tour-search-input datepicker hasDatepicker" id="date_to" placeholder="Day end">
+							</div>
+							<div class="search-item item-select">
+								<select name="people">
+									<option value="1">1 room</option>
+									<option value="2">2 rooms</option>
+									<option value="3">3 rooms</option>
+									<option value="4">4 rooms</option>
+								</select>
+							</div>
+							<div class="search-item item-budget">
+								<input type="number" class="hotel-budget-input" id="budget" placeholder="Max budget">
+							</div>
+							<div class="button">
+								<button class="button" onclick="selectByMul()">Search Hotel <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+							</div>
+						</div>
+					</div>
+					<div class="module-search clearfix">
+						<h3 class="modtitle">Hotel Name</h3>
+						<div class="search-pr">
+							<div class="search-item city">
+								<input type="text" class="tour-search-input" id="name" name="hotelName" placeholder="Chengdu">
+							</div>
+							<div class="button">
+								<button class="button" onclick="selectByName()">Search Hotel<i class="fa fa-angle-right" aria-hidden="true"></i></button>
+							</div>
+						</div>
+					</div>
+					<div class="module-rate clearfix">
+						<h3>star rating</h3>
+						<ul>
+							<li><a href="#" onclick="selectByStar(5)"><div class="star"><span style="width: 75px"></span></div><label>5</label></a></li>
+							<li><a href="#" onclick="selectByStar(4)"><div class="star"><span style="width: 60px"></span></div><label>4</label></a></li>
+							<li><a href="#" onclick="selectByStar(3)"><div class="star"><span style="width: 45px"></span></div><label>3</label></a></li>
+							<li><a href="#" onclick="selectByStar(2)"><div class="star"><span style="width: 30px"></span></div><label>2</label></a></li>
+							<li><a href="#" onclick="selectByStar(1)"><div class="star"><span style="width: 15px"></span></div><label>1</label></a></li>
+						</ul>
+					</div>
+				</aside>
+				<div id="content" class="col-md-9 col-sm-12 col-xs-12">
+					<div class="box">
+						<!-- /.box-header -->
+						<div class="box-body">
+							<table id="table1" class="table table-bordered table-hover">
+							</table>
+						</div>
+						<!-- /.box-body -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- //Main Container -->
+
+		<!-- Footer Container -->
+		<footer class="footer-container typefooter-1">
+			<div class="footer-has-toggle" id="collapse-footer">
+				<div class="so-page-builder">
+					<div class="container-fluid page-builder-ltr">
+						<div class="row row_mvtd footer--center2 row-color ">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col_6fdl float_none container">
+								<div class="row row_hwmc  ">
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
+										<div class="footer-logo">
+											<a href="adminindex.html"><img th:src="@{/plugins/image/logo/logo-footer.png}" alt="Your Store" width="194" height="59" title="Your Store"></a>
+										</div>
+										<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form...</p>						
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
+										<h3 class="title-footer">
+											Address
+										</h3>
+										<ul class="about-list">
+											<li><i class="fa fa-map-marker" aria-hidden="true"></i><span class="ab-pd">Ranelagh Place, Liverpool, L3 5UL, England</span></li>
+											<li class="call-mail"><i class="fa fa-paper-plane" aria-hidden="true"></i><a class="ab-pd" href="mailto:contact@wpthemego.com">contact@wpthemego.com</a></li>
+											<li class="call-phone"><i class="fa fa-mobile" aria-hidden="true"></i><a class="ab-pd" href="#">8 (495) 989—20—11</a></li>
+										</ul>
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
+										<h3 class="title-footer">
+											Useful Links
+										</h3>
+										<ul class="links">
+											<li>
+												<a href="index.html">Home</a>
+											</li>
+											<li>
+												<a href="#">Shop</a>
+											</li>
+											<li>
+												<a href="#">Privacy Policy</a>
+											</li>
+											<li>
+												<a href="#">Terms & Condition</a>
+											</li>
+											<li>
+												<a href="#">Latest News</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col_6ps1 footer--link">
+										<h3 class="title-footer">
+											Contact
+										</h3>
+										<ul class="links">
+											<li>
+												<a href="about-us.html">About Us</a>
+											</li>
+											<li>
+												<a href="contact-us-v1.html">Contact Us</a>
+											</li>
+											<li>
+												<a href="blog-grid.html">Blog</a>
+											</li>
+											<li>
+												<a href="#">Purchase Theme</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-toggle hidden-lg hidden-md">
+				<a class="showmore collapsed" data-toggle="collapse" href="#collapse-footer" aria-expanded="false" aria-controls="collapse-footer">
+					<span class="toggle-more"><i class="fa fa-angle-double-down"></i>Show More</span>
+					<span class="toggle-less"><i class="fa fa-angle-double-up"></i>Show less</span>
+				</a>
+			</div>
+			<div class="footer-bottom ">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 copyright">
+							Sw PortKey ©2019. All Rights Reserved. Designed by <a href="http://www.bootstrapmb.com" target="_blank">wpthemego.Com</a>
+						</div>
+						<div class="col-md-6 col-sm-6 social">
+							<h3>Follows Us:</h3>
+							<ul>
+								<li><a href="https://www.facebook.com/wpthemego" title="Face Book"><span class="fa fa-facebook"></span></a></li>
+								<li><a href="https://twitter.com/wpthemego" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+								<li><a href="https://www.pinterest.com/wpthemego/" title="pinterest"><span class="fa fa-pinterest"></span></a></li>
+								<li><a href="#" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+								<li><a href="https://plus.google.com/u/0/117616422700848151321" title="Google Plus"><span class="fa fa-google-plus"></span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- //end Footer Container -->
+
+
+	</div>
+
+	<div class="back-to-top"><i class="fa fa-angle-up"></i></div>
+<!-- End Color Scheme
+	============================================ -->
+
+
+
+<!-- Include Libs & Plugins
+	============================================ -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script th:src="@{/admin/js/common.js}"></script>
+	<script th:src="@{/admin/js/x-layui.js}" charset="utf-8"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/jquery-2.2.4.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/so_megamenu.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/owl-carousel/owl.carousel.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/slick-slider/slick.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/libs.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/unveil/jquery.unveil.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/countdown/jquery.countdown.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/datetimepicker/moment.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/datetimepicker/bootstrap-datetimepicker.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/jquery-ui/jquery-ui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/modernizr/modernizr-2.6.2.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/minicolors/jquery.miniColors.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/jquery.nav.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/quickview/jquery.magnific-popup.min.js}"></script>
+	<script type="text/javascript" th:src="@{/bootstrap-table/bootstrap-table.js}"></script>
+	<script type="text/javascript" th:src="@{/bootstrap-table/locale/bootstrap-table-zh-CN.js}"></script>
+<!-- Theme files
+	============================================ -->
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/application.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/homepage.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/custom_h1.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/noui.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/js/themejs/nouislider.js}"></script>
+	<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+</body>
+</html>

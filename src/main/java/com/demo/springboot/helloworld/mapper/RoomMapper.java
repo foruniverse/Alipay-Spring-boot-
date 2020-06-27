@@ -2,8 +2,9 @@ package com.demo.springboot.helloworld.mapper;
 
 import com.demo.springboot.helloworld.common.domain.Room;
 import com.demo.springboot.helloworld.common.domain.RoomExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RoomMapper {
     long countByExample(RoomExample example);

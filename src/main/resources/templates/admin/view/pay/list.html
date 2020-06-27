@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<!--
+    功能:订单选择
+    编写人:hcy
+
+-->
+<head>
+    <meta charset="utf-8">
+    <title>填写订单</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+<form class="layui-form " lay-filter="formOrder" action="/aliPay/goPay" method=post>
+    <div class="layui-form-item">
+        <label class="layui-form-label">当前用户</label>
+        <div class="layui-input-inline">
+            <input id="test" type="text" name="user" required readonly="true" placeholder="请输入标题" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">这是你的账号的吗?</div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">预定酒店</label>
+        <div class="layui-input-inline">
+            <input type="text" name="hotel" required readonly="true" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">预定酒店id</label>
+        <div class="layui-input-inline">
+            <input type="text" name="hotelId" required readonly="true" pautocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">预定房间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="room" required placeholder="522号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">入住人</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="man" title="大人" checked>
+            <input type="checkbox" name="child" title="儿童">
+            <input type="checkbox" name="baby" title="婴幼儿">
+        </div>
+    </div>
+
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">订单备注</label>
+        <div class="layui-input-block">
+            <textarea name="comment" placeholder="订单备注" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付金额</label>
+        <div class="layui-input-inline">
+            <input type="text" name="price" required autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付方式</label>
+        <div class="layui-input-block">
+            <input type="checkbox" readonly="true" name="Alipay" title="支付宝">
+            <!--            <input type="checkbox" name="like[read]" readonly="true" title="微信支付">-->
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <!--            lay-submit lay-filter="formDemo"-->
+            <button class="layui-btn" type="submit">支付</button>
+            <button type="reset" class="layui-btn layui-btn-primary">清空</button>
+        </div>
+    </div>
+</form>
+
+<script src="../../js/x-layui.js" charset="utf-8"></script>
+<script src="../../js/common.js"></script>
+<script src="/layui/layui.js"></script>
+<script>
+    //Demo
+    layui.use(['form', 'layedit'], function () {
+        var form = layui.form;
+        var $ = layui.$;
+        var layer = layui.layer;
+        var layedit = layui.layedit;
+        form.on('submit(formDemo)', function (data) {
+
+            layer.msg(JSON.stringify(data.field));
+            // $.ajax({
+            //     url:"localhost:8585/aliPay/goPay"
+            //     ,type: "POST"
+            //     ,contentType: 'application/x-www-form-urlencoded'
+            //     ,corssDomain: true
+            //     ,data:JSON.stringify(data.field)
+            // })
+            return false;
+        });
+
+        form.val('formOrder', { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+            "user": "1256349091" // "name": "value"
+            , "hotel": "天府酒店"
+            , "hotelId": 1
+            , "room": 7
+            , "man": true
+            , "comment": "不要浴巾"
+            , "price": 89.99
+        });
+
+        // // layui.$('#LAY-component-form-setval').on('click', function(){
+        //     form.val('example', {
+        //         "username": "贤心" // "name": "value"
+        //         ,"password": "123456"
+        //         ,"interest": 1
+        //         ,"like[write]": true //复选框选中状态
+        //         ,"close": true //开关状态
+        //         ,"sex": "女"
+        //         ,"desc": "我爱 layui"
+        //     });
+        // // });
+        //
+        // //表单取值
+        // layui.$('#LAY-component-form-getval').on('click', function(){
+        //     var data = form.val('example');
+        //     alert(JSON.stringify(data));
+        // });
+    });
+</script>
+
+
+</body>
+</html>

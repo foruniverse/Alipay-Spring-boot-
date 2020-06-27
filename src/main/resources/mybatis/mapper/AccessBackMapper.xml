@@ -3,37 +3,44 @@
 <mapper namespace="com.demo.springboot.helloworld.mapper.AccessBackMapper">
 
 
-    <select id="findCode" resultType="com.demo.springboot.helloworld.entity.ZCode" parameterType="Map">
+    <select id="findCode" resultType="com.demo.springboot.helloworld.common.domain.Code" parameterType="Map">
         select  *
         from code  where status='1' and mail=#{mail}
         order by createtime desc  limit 1
     </select>
 
 
-    <update id="updateCode"  parameterType="com.demo.springboot.helloworld.entity.ZCode">
+    <update id="updateCode"  parameterType="com.demo.springboot.helloworld.common.domain.Code">
         UPDATE code set status='2'
         WHERE id=#{id}
     </update>
 
-    <insert id="regist" parameterType="com.demo.springboot.helloworld.entity.ZUser">
-        insert into user (id,email,phone,pic,password,name,sex,age,zfb,createtime,level)
+    <insert id="regist" parameterType="com.demo.springboot.helloworld.common.domain.User">
+        insert into user (id,name,password,pic,email,phone,zfb,sex,age,createtime,level,status)
             values
-        (#{id},#{email},#{phone},#{pic},#{password},#{name},#{sex},#{age},#{zfb},#{createtime},#{level});
+        (#{id},#{name},#{password},#{pic},#{email},#{phone},#{zfb},#{sex},#{age},#{createtime},#{level},#{status});
     </insert>
 
-    <insert id="getCode" parameterType="com.demo.springboot.helloworld.entity.ZCode">
+    <insert id="getCode" parameterType="com.demo.springboot.helloworld.common.domain.Code">
         insert into code (id,code,mail,status,createtime) values (#{id},#{code},#{mail},#{status},#{createtime});
     </insert>
 
-    <select id="login" resultType="com.demo.springboot.helloworld.entity.ZUser" parameterType="com.demo.springboot.helloworld.entity.ZUser">
+    <select id="login" resultType="com.demo.springboot.helloworld.common.domain.User" parameterType="com.demo.springboot.helloworld.common.domain.User">
         select  * from user  where  email=#{email} and password=#{password}
     </select>
 
-    <select id="findZUserById" resultType="com.demo.springboot.helloworld.entity.ZUser" parameterType="java.lang.String">
+    <select id="findUserById" resultType="com.demo.springboot.helloworld.common.domain.User" parameterType="java.lang.String">
         select  * from user  where id=#{id}
     </select>
+    <select id="selectid" resultType="com.demo.springboot.helloworld.common.domain.User" parameterType="java.lang.String">
+        select  * from user  where id=#{id}
+    </select>
+    <select id="selOrderById" resultType="com.demo.springboot.helloworld.common.domain.Order" parameterType="java.lang.String">
+        select  * from order_info  where uid=#{id}
+    </select>
 
-    <update id="updateZUser"  parameterType="com.demo.springboot.helloworld.entity.ZUser">
+
+    <update id="updateUser"  parameterType="com.demo.springboot.helloworld.common.domain.User">
         UPDATE user
         <trim prefix="set" suffixOverrides=",">
             <if test="password!=null and password!= ''">password=#{password},</if>
@@ -48,14 +55,13 @@
         WHERE id=#{id}
     </update>
 
-    <select id="findZUserByEmail" resultType="com.demo.springboot.helloworld.entity.ZUser" parameterType="Map">
+    <select id="findUserByEmail" resultType="com.demo.springboot.helloworld.common.domain.User" parameterType="Map">
         select  * from user  where email=#{mail}  limit 1
     </select>
 
 
-
-    <select id="findOrder" resultType="com.demo.springboot.helloworld.entity.ZOrder" parameterType="com.demo.springboot.helloworld.entity.ZOrder">
-        select * from z_order a
+    <select id="findOrder" resultType="com.demo.springboot.helloworld.common.domain.Order" parameterType="com.demo.springboot.helloworld.common.domain.Order">
+        select * from order_info a
         <if test="level==1">
             where a.email = #{email}
         </if>
@@ -74,8 +80,8 @@
         order by a.createtime desc  limit #{page},#{pageSize}
     </select>
 
-    <select id="findOrderCount" resultType="java.lang.Integer" parameterType="com.demo.springboot.helloworld.entity.ZOrder">
-        select count(1) from z_order a
+    <select id="findOrderCount" resultType="java.lang.Integer" parameterType="com.demo.springboot.helloworld.common.domain.Order">
+        select count(1) from order_info a
         <if test="level==1">
             where a.email = #{email}
         </if>
@@ -93,38 +99,69 @@
         </if>
     </select>
 
-    <select id="findOrderDetail" resultType="com.demo.springboot.helloworld.entity.ZOrderDetail" parameterType="com.demo.springboot.helloworld.entity.ZOrderDetail">
-        select * from z_order_detail where 1=1
+    <select id="findOrderDetail" resultType="com.demo.springboot.helloworld.common.domain.OrderDetail" parameterType="com.demo.springboot.helloworld.common.domain.OrderDetail">
+        select * from order_detail where 1=1
         <if test="orderno != null and orderno!= ''">
-            AND orderno = #{orderno}
-        </if>
-        order by createtime desc  limit #{page},#{pageSize}
-    </select>
-
-    <select id="findOrderDetailCount" resultType="java.lang.Integer" parameterType="com.demo.springboot.helloworld.entity.ZOrderDetail">
-        select count(1) from z_order_detail where 1=1
-        <if test="orderno != null and orderno!= ''">
-            AND orderno = #{orderno}
+            AND  orderno = #{orderno}
         </if>
     </select>
 
+    <select id="findOrderDetailCount" resultType="java.lang.Integer" parameterType="com.demo.springboot.helloworld.common.domain.OrderDetail">
+        select count(1) from order_detail where 1=1
+        <if test="orderno != null and orderno!= ''">
+            AND orderno = #{orderno}
+        </if>
+    </select>
 
-    <select id="findZUser" resultType="com.demo.springboot.helloworld.entity.ZUser" parameterType="com.demo.springboot.helloworld.entity.ZUser">
+
+    <select id="findUser" resultType="com.demo.springboot.helloworld.common.domain.User"
+            parameterType="com.demo.springboot.helloworld.common.domain.User">
         select * from user where level &lt; #{level}
         <if test="name != null and name!= ''">
             AND name = #{name}
         </if>
-        order by createtime desc  limit #{page},#{pageSize}
+        order by createtime desc limit #{page},#{pageSize}
     </select>
 
-    <select id="findZUserCount" resultType="java.lang.Integer" parameterType="com.demo.springboot.helloworld.entity.ZUser">
+    <select id="findUserCount" resultType="java.lang.Integer"
+            parameterType="com.demo.springboot.helloworld.common.domain.User">
         select count(1) from user where level &lt; #{level}
         <if test="name != null and name!= ''">
             AND name = #{name}
         </if>
     </select>
-
-    <delete id="deleteZUser" parameterType="String">
+    <!--何成阳部分-->
+    <delete id="deleteUser" parameterType="String">
         delete from user where id = #{id}
     </delete>
+
+    <!--    //主键自增,插入返回插入行数, 通过 order.getId() 获得自增主键  by hcy-->
+    <insert id="insertOrderInfo" parameterType="com.demo.springboot.helloworld.common.domain.Order"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into order_info (uid,hotel_id,hotel,room_id,totleprice,createtime,mobile,email,status)
+        values(#{uid},#{hotel_id},#{hotel},#{room_id},#{totleprice},now(),#{mobile},#{email},#{status})
+    </insert>
+    <!--    更新订单状态  by hcy-->
+    <update id="updateOrderState" parameterType="com.demo.springboot.helloworld.common.domain.Order">
+        update order_info
+        set status=#{status}, orderno = #{orderno}
+        where id=#{id}
+    </update>
+
+    <insert id="insertOrderDetail" parameterType="com.demo.springboot.helloworld.common.domain.OrderDetail">
+            insert into order_detail values(#{id},#{orderno},#{name},#{room},#{roomtype},#{price},#{remark})
+    </insert>
+
+    <select id="selectUserByEmail" parameterType="java.lang.String"
+            resultType="com.demo.springboot.helloworld.common.domain.User">
+       select * from user
+       where email= #{string1}
+    </select>
+
+    <update id="updateOrderDetailState" parameterType="com.demo.springboot.helloworld.common.domain.OrderDetail">
+        update order_detail
+        set  orderno = #{orderno}
+        where id=#{id}
+    </update>
+    <!--    何晨阳部分-->
 </mapper>
