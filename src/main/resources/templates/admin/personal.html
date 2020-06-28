@@ -79,7 +79,6 @@
 							</div>
 						</div>
 
-
 						<div class="search-top pull-right">
 
 							<form method="GET" action="">
@@ -245,7 +244,7 @@
 																				<ul class="row-list">
 																					<li><a class="subcategory_item" href="personal.html">个人信息</a></li>
 																					<li><a class="subcategory_item" href="order.html">订单信息</a></li>
-
+																					<li><a class="subcategory_item" href="login.html">注销</a></li>
 																				</ul>
 																			</div>
 																		</div>
@@ -295,7 +294,7 @@
 								<input type="text" name="age" value="" placeholder="" id="age">
 							</div>
 							<div class="form-item item2 required">
-								<label class="control-label" for="telephone">电话</label>
+								<label class="control-label" for="phone">电话</label>
 								<input type="text" name="phone" value="" placeholder="" id="phone">
 							</div>
 							<div class="form-item item1 required">
@@ -478,7 +477,7 @@
                 }
 				if (localStorage.getItem("name")!=null) {
 					$("#logo").text(localStorage.getItem("name"));
-					$('#logo').attr('href','');
+					$('#logo').attr('href','personal.html');
 				}else {
 					$("#logo").text('登陆');
 					$('#logo').attr('href','login.html');

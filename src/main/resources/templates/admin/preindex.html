@@ -64,6 +64,22 @@
 			<div class="header-top hidden-compact">
 				<div class="container">
 					<div class="row">
+
+						<div class="col-lg-3 col-xs-6 header-logo pull-left">
+							<div class="navbar-logo">
+								<a href="index.html"><img src="./plugins/image/logo.png"
+														  alt="Your Store" width="118" height="36"
+														  title="Your Store"></a>
+							</div>
+						</div>
+
+						<div class="book pull-right" id="log">
+							<a href="login.html" id="logo">登陆</a>
+							<div class="layui-side-scroll">
+							</div>
+						</div>
+
+
 						<div class="col-lg-3 col-xs-3 header-logo pull-left">
 							<div class="navbar-logo">
 								<a href="#"><img th:src="@{/plugins/catalog/demo/logo/logo2.png}" alt="Your Store" width="131" height="40" title="Your Store"></a>
@@ -119,6 +135,14 @@
 																	</div>
 																</div>
 															</li>
+															<!--<li class="menu-home with-sub-menu hover">
+																<p class="close-menu"></p>
+																<a href="/admin/login.html" class="clearfix">
+																	<strong>
+																		Login
+																	</strong>
+																</a>
+															</li>-->
 														</ul>
 													</div>
 												</div>
@@ -729,6 +753,45 @@
 	<script type="text/javascript" th:src="@{/plugins/js/themejs/application.js}"></script>
 	<script type="text/javascript" th:src="@{/plugins/js/themejs/homepage.js}"></script>
 	<script type="text/javascript" th:src="@{/plugins/js/themejs/custom_h2.js}"></script>
+
+	<script>
+		$(function () {
+			id = localStorage.getItem("id");
+			$.ajax({
+
+				url: "http://127.0.0.1:8585/back/selectid",
+				data: {id: id},
+				type: "post",
+				dateType: "json",
+				success: function (data) {
+					$("input[name='id']").val(data.data.id);
+					$("input[name='name']").val(data.data.name);
+					$("input[name='password']").val(data.data.password);
+					$("input[name='email']").val(data.data.email);
+					$("input[name='phone']").val(data.data.phone);
+					$("input[name='zfb']").val(data.data.zfb);
+					$("input[name='sex']").val(data.data.sex);
+					$("input[name='age']").val(data.data.age);
+				},
+				error: function (e) {
+					alert("请求失败！");
+				}
+			})
+			//为登录按钮绑定单击事件
+			$("#submit").click(function(){
+				return login();
+			})
+		})
+
+
+		if (localStorage.getItem("name")!=null) {
+			$("#logo").text(localStorage.getItem("name"));
+			$('#logo').attr('href','personal.html');
+		}else {
+			$("#logo").text('登陆');
+			$('#logo').attr('href','login.html');
+		}
+	</script>
 
 </body>
 
